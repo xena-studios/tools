@@ -10,12 +10,12 @@ What's built, what's next, and how the rest will work. A tool is planned until i
 | -------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Gradient Text  | Built | Every legacy hex form, MiniMessage (per letter or the `<gradient>` tag), JSON for 1.21.5+ and older                                                                                                            |
 | Text Converter | Built | Reads legacy, MiniMessage and JSON; writes all of them; warns what a format can't hold                                                                                                                         |
-| MOTD Generator | Next  | Two lines with a server-list preview; output for `server.properties` (`§` escapes), Velocity, BungeeCord and MiniMOTD                                                                                          |
+| MOTD Generator | Built | Two lines with a server-list preview; output for `server.properties` (`§` escapes, hex for Paper or the 16 colours for vanilla), Velocity, BungeeCord, MiniMOTD and MiniMessage                       |
 | Startup Flags  | Next  | RAM, Java version, software (Paper, Velocity, Fabric…), G1 (Aikar's) or generational ZGC; `start.sh`, `start.bat`, Pterodactyl and Docker; warns about common mistakes                                         |
 | Log Analyzer   | Next  | Paste `latest.log` or a crash report, or an mclo.gs link. Rules in data files (wrong Java, missing dependency, port in use, "Can't keep up", errors grouped by plugin), each with a fix. Parsed in the browser |
-| Server Status  | Next  | Java and Bedrock, with the MOTD drawn by McText, version, players, icon, latency, SRV                                                                                                                          |
+| Server Status  | Next  | Java and Bedrock, with the MOTD drawn by ServerList, version, players, icon, latency, SRV                                                                                                                          |
 | Player Lookup  | Next  | Name to UUID and back, skin and cape viewer, head give command, offline-mode UUID                                                                                                                              |
-| Server Icon    | Next  | Crop and scale any image to 64×64 `server-icon.png`, previewed in the server list                                                                                                                              |
+| Server Icon    | Built | Crop and scale any image to 64×64 `server-icon.png` (pixel art or smooth), previewed in the server list. Never uploaded                                                                                       |
 
 ### After that
 

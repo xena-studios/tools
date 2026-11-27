@@ -4,12 +4,14 @@
 
 Free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), at [tools.xenastudios.co](https://tools.xenastudios.co). Every tool runs in your browser, keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
 
-> **Status:** early. Gradient Text and Text Converter are live; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
+> **Status:** early. Gradient Text, Text Converter, MOTD Generator and Server Icon are live; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 | Tool                                                          | What it does                                                                                                                   |
 | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | [Gradient Text](https://tools.xenastudios.co/gradient)        | Colours text with a gradient, written as MiniMessage, `&#RRGGBB`, `&x&R&R…`, `{#RRGGBB}`, `<#RRGGBB>`, 16-colour codes or JSON |
 | [Text Converter](https://tools.xenastudios.co/text-converter) | Reads legacy codes, MiniMessage or JSON, shows it as players will see it, and converts it to any of the others                 |
+| [MOTD Generator](https://tools.xenastudios.co/motd)           | Two lines with a server-list preview, written for `server.properties`, Velocity, BungeeCord, MiniMOTD or plain MiniMessage     |
+| [Server Icon](https://tools.xenastudios.co/server-icon)       | Crops and scales any image to a 64×64 `server-icon.png` in your browser, previewed in the server list                          |
 
 ## What's here
 
