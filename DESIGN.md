@@ -114,6 +114,17 @@ components:
     textColor: "#FFFFFF"
     typography: "{typography.preview}"
     padding: "1rem 0.75rem"
+  server-list:
+    backgroundColor: "#0C0C0C"
+    textColor: "#FFFFFF"
+    typography: "{typography.preview}"
+    rounded: "{rounded.panel}"
+    padding: "1rem"
+  range:
+    backgroundColor: "{colors.line}"
+    textColor: "{colors.accent}"
+    rounded: "{rounded.pill}"
+    height: "2.75rem"
 ---
 
 # Design System: Tools
@@ -286,6 +297,28 @@ Draws spans the way the game does, in Monocraft at 1.25 line height, with `pre-w
 - Hover text appears on hover in the game's tooltip (a `#100010` box at 95% with a 2px `#25015B` border and 3px corners); click actions show in the title.
 - Backgrounds: chat's translucent black (default), a plain dark stand-in for the menu backdrop (`#2B2118`, no textures), or none.
 - Uncoloured text falls back to white, as in chat; a tool drawing the server list passes the game's grey instead.
+
+### ServerList
+
+`components/ServerList.tsx`: one entry of the game's multiplayer screen, used by the MOTD Generator and Server Icon, and meant for Server Status. Everything in it is drawn by us: no game textures, sprites or font.
+
+- **Grid:** laid out in game pixels (`--gp`), as the game lays out the row: 305 wide, a 32-pixel icon, a 3-pixel gap, then 267 pixels for the name and the MOTD. A game pixel is 2px where there's room and shrinks with the container (`100cqw / 306`) on a phone, so the proportions hold at any width.
+- **Icon:** 64×64 on screen at 2×, `image-rendering: pixelated`. With no icon it draws a placeholder: a dark square with a hairline and a small landscape.
+- **Name:** white, with the game's shadow.
+- **MOTD:** McText's line renderer in Monocraft at 9 game pixels to the em (Monocraft's own grid: 9 to the em, 6 to an advance), line height 9. It wraps in the 267-pixel box and clips after two lines, as the game does. Uncoloured text is the list's grey, `#808080`, a step darker than chat's.
+- **Player count:** top right, the numbers in gray (`#AAAAAA`) and the slash in dark grey (`#555555`), as the game draws them.
+- **Signal:** five green bars, our own SVG, 10×8 game pixels.
+- **Backdrop:** a plain near-black (`#0C0C0C`) panel, 12px radius. No menu texture.
+- **Honesty:** Monocraft is monospaced and the game's font isn't, so widths and wrap points are close, not exact; the guides say so.
+
+### Range slider
+
+`.range`: a 4px hairline track in `line`, filled in Ion Blue up to the thumb (`--fill`, set by the page), and a text-coloured round thumb with a 2px Ion Blue edge. Focus draws the soft Ion Blue ring round the thumb. It's a native `input type="range"`, so arrow keys, Page Up/Down and Home/End work.
+
+### Swatches and the crop
+
+- **Swatch** (`.swatch`): a 36px round pill filled with a game colour inside a hairline, for inserting that colour. The colour is the control's subject, which is the one place game colours may sit outside a preview.
+- **Crop** (`.crop-view`): a square window on an image with a hairline and the 12px radius, dragged to pan (pointer capture, `touch-action: none`) and moved with the arrow keys when focused.
 
 ### External and inward links
 

@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GradientRouteImport } from './routes/gradient'
+import { Route as MotdRouteImport } from './routes/motd'
+import { Route as ServerIconRouteImport } from './routes/server-icon'
 import { Route as TextConverterRouteImport } from './routes/text-converter'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +25,16 @@ const GradientRoute = GradientRouteImport.update({
   path: '/gradient',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MotdRoute = MotdRouteImport.update({
+  id: '/motd',
+  path: '/motd',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServerIconRoute = ServerIconRouteImport.update({
+  id: '/server-icon',
+  path: '/server-icon',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TextConverterRoute = TextConverterRouteImport.update({
   id: '/text-converter',
   path: '/text-converter',
@@ -32,30 +44,44 @@ const TextConverterRoute = TextConverterRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/gradient': typeof GradientRoute
+  '/motd': typeof MotdRoute
+  '/server-icon': typeof ServerIconRoute
   '/text-converter': typeof TextConverterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/gradient': typeof GradientRoute
+  '/motd': typeof MotdRoute
+  '/server-icon': typeof ServerIconRoute
   '/text-converter': typeof TextConverterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/gradient': typeof GradientRoute
+  '/motd': typeof MotdRoute
+  '/server-icon': typeof ServerIconRoute
   '/text-converter': typeof TextConverterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/gradient' | '/text-converter'
+  fullPaths: '/' | '/gradient' | '/motd' | '/server-icon' | '/text-converter'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/gradient' | '/text-converter'
-  id: '__root__' | '/' | '/gradient' | '/text-converter'
+  to: '/' | '/gradient' | '/motd' | '/server-icon' | '/text-converter'
+  id:
+    | '__root__'
+    | '/'
+    | '/gradient'
+    | '/motd'
+    | '/server-icon'
+    | '/text-converter'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GradientRoute: typeof GradientRoute
+  MotdRoute: typeof MotdRoute
+  ServerIconRoute: typeof ServerIconRoute
   TextConverterRoute: typeof TextConverterRoute
 }
 
@@ -75,6 +101,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GradientRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/motd': {
+      id: '/motd'
+      path: '/motd'
+      fullPath: '/motd'
+      preLoaderRoute: typeof MotdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/server-icon': {
+      id: '/server-icon'
+      path: '/server-icon'
+      fullPath: '/server-icon'
+      preLoaderRoute: typeof ServerIconRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/text-converter': {
       id: '/text-converter'
       path: '/text-converter'
@@ -88,6 +128,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GradientRoute: GradientRoute,
+  MotdRoute: MotdRoute,
+  ServerIconRoute: ServerIconRoute,
   TextConverterRoute: TextConverterRoute,
 }
 export const routeTree = rootRouteImport

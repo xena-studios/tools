@@ -42,7 +42,7 @@ export const TOOLS: readonly Tool[] = [
     summary:
       "Design your server list message with a true-to-game preview, for server.properties and proxies.",
     keywords: ["server list", "motd", "velocity", "bungeecord", "server.properties"],
-    status: "planned",
+    status: "live",
   },
   {
     slug: "flags",
@@ -85,7 +85,7 @@ export const TOOLS: readonly Tool[] = [
     category: "Branding",
     summary: "Turn any image into a 64×64 server-icon.png, previewed in the server list.",
     keywords: ["icon", "favicon", "server-icon.png", "64x64"],
-    status: "planned",
+    status: "live",
   },
 ];
 
