@@ -5,6 +5,13 @@ import { Command } from "cmdk";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { CATEGORIES, LIVE_TOOLS } from "../tools";
 
+/** ⌘K on Apple devices, Ctrl K everywhere else. Renders ⌘K until hydrated. */
+export function ShortcutHint({ className = "" }: { className?: string }) {
+  const [mac, setMac] = useState(true);
+  useEffect(() => setMac(/Mac|iPhone|iPad/.test(navigator.platform)), []);
+  return <kbd className={`text-text ${className}`}>{mac ? "⌘K" : "Ctrl K"}</kbd>;
+}
+
 const PaletteContext = createContext<() => void>(() => {});
 export const useOpenPalette = () => useContext(PaletteContext);
 
@@ -47,7 +54,7 @@ export function CommandPaletteProvider({ children }: { children: React.ReactNode
         open={open}
         onOpenChange={setOpen}
         label="Find a tool"
-        overlayClassName="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+        overlayClassName="fixed inset-0 z-40 bg-bg/75"
         contentClassName="fixed left-1/2 top-[12vh] z-50 w-[min(36rem,calc(100vw-2rem))] -translate-x-1/2 overflow-hidden rounded-box border border-rule bg-raised shadow-2xl"
       >
         <Command.Input
@@ -59,11 +66,7 @@ export function CommandPaletteProvider({ children }: { children: React.ReactNode
             No tool matches that yet.
           </Command.Empty>
           {groups.map((g) => (
-            <Command.Group
-              key={g.category}
-              heading={g.category}
-              className="[&_[cmdk-group-heading]]:label [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-2"
-            >
+            <Command.Group key={g.category} heading={g.category} className="palette-group">
               {g.tools.map((t) => (
                 <Command.Item
                   key={t.slug}

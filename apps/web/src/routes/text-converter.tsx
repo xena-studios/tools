@@ -47,7 +47,7 @@ interface State {
 
 const DEFAULTS: State = {
   input:
-    "<gradient:#7052FF:#5CB4FF><bold>Xena Tools</bold></gradient> <gray>| <hover:show_text:'<green>Opens the site'><click:open_url:'https://tools.xenastudios.co'><u>tools.xenastudios.co</u></click></hover>",
+    "<gradient:#5CB4FF:#EDF1F7><bold>Xena Studios</bold></gradient> <gray>| <hover:show_text:'<green>Opens the site'><click:open_url:'https://tools.xenastudios.co'><u>tools.xenastudios.co</u></click></hover>",
   from: "auto",
   to: "legacy-hash",
 };
@@ -113,19 +113,20 @@ function ConverterTool() {
             </span>
             <textarea
               className="field min-h-48 resize-y font-mono text-sm"
+              aria-invalid={result.error ? true : undefined}
               value={state.input}
               onChange={(e) => update({ input: e.target.value })}
               spellCheck={false}
             />
           </label>
           {result.error && (
-            <p role="alert" className="text-sm text-[#FF8A8A]">
+            <p role="alert" className="text-sm text-[var(--danger)]">
               That isn't valid JSON: {result.error}
             </p>
           )}
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 self-start lg:sticky lg:top-24">
           <FormatPicker
             label="To"
             options={TEXT_FORMATS}

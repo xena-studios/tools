@@ -98,7 +98,7 @@ export function toolBySlug(slug: string): Tool {
 }
 
 export const SITE = {
-  name: "Xena Tools",
+  name: "Xena Studios tools",
   url: "https://tools.xenastudios.co",
   tagline: "Tools for running a Minecraft server.",
   repo: "https://github.com/xena-studios/tools",

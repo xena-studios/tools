@@ -113,7 +113,7 @@ export function McText({
   const hasText = spans.some((s) => s.text.trim() !== "");
   return (
     <div
-      className={`mc ${shadow ? "mc-shadow" : ""} ${BACKGROUNDS[background]} rounded-md px-3 py-2 text-lg ${className}`}
+      className={`mc ${shadow ? "mc-shadow" : ""} ${BACKGROUNDS[background]} rounded-[var(--radius)] px-3 py-2 text-lg ${className}`}
     >
       {hasText ? (
         <McLine spans={spans} fallback={fallback} />

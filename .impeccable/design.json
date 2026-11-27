@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-27T00:00:00Z",
+  "title": "Design System: Tools",
+  "extensions": {
+    "colorMeta": {
+      "void": {
+        "role": "neutral",
+        "displayName": "Void",
+        "canonical": "#06080D",
+        "tonalRamp": [
+          "oklch(15% 0.012 264.7)",
+          "oklch(26% 0.012 264.7)",
+          "oklch(38% 0.012 264.7)",
+          "oklch(49% 0.012 264.7)",
+          "oklch(61% 0.012 264.7)",
+          "oklch(72% 0.012 264.7)",
+          "oklch(84% 0.012 264.7)",
+          "oklch(95% 0.012 264.7)"
+        ]
+      },
+      "space": {
+        "role": "neutral",
+        "displayName": "Space",
+        "canonical": "#0A0E16",
+        "tonalRamp": [
+          "oklch(15% 0.018 263.9)",
+          "oklch(26% 0.018 263.9)",
+          "oklch(38% 0.018 263.9)",
+          "oklch(49% 0.018 263.9)",
+          "oklch(61% 0.018 263.9)",
+          "oklch(72% 0.018 263.9)",
+          "oklch(84% 0.018 263.9)",
+          "oklch(95% 0.018 263.9)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#121824",
+        "tonalRamp": [
+          "oklch(15% 0.026 263.8)",
+          "oklch(26% 0.026 263.8)",
+          "oklch(38% 0.026 263.8)",
+          "oklch(49% 0.026 263.8)",
+          "oklch(61% 0.026 263.8)",
+          "oklch(72% 0.026 263.8)",
+          "oklch(84% 0.026 263.8)",
+          "oklch(95% 0.026 263.8)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "#222B3B",
+        "tonalRamp": [
+          "oklch(15% 0.032 261.7)",
+          "oklch(26% 0.032 261.7)",
+          "oklch(38% 0.032 261.7)",
+          "oklch(49% 0.032 261.7)",
+          "oklch(61% 0.032 261.7)",
+          "oklch(72% 0.032 261.7)",
+          "oklch(84% 0.032 261.7)",
+          "oklch(95% 0.032 261.7)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#8A93A6",
+        "tonalRamp": [
+          "oklch(15% 0.030 265.3)",
+          "oklch(26% 0.030 265.3)",
+          "oklch(38% 0.030 265.3)",
+          "oklch(49% 0.030 265.3)",
+          "oklch(61% 0.030 265.3)",
+          "oklch(72% 0.030 265.3)",
+          "oklch(84% 0.030 265.3)",
+          "oklch(95% 0.030 265.3)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Text",
+        "canonical": "#EDF1F7",
+        "tonalRamp": [
+          "oklch(15% 0.009 258.3)",
+          "oklch(26% 0.009 258.3)",
+          "oklch(38% 0.009 258.3)",
+          "oklch(49% 0.009 258.3)",
+          "oklch(61% 0.009 258.3)",
+          "oklch(72% 0.009 258.3)",
+          "oklch(84% 0.009 258.3)",
+          "oklch(95% 0.009 258.3)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Ion Blue",
+        "canonical": "#5CB4FF",
+        "tonalRamp": [
+          "oklch(15% 0.138 246.7)",
+          "oklch(26% 0.138 246.7)",
+          "oklch(38% 0.138 246.7)",
+          "oklch(49% 0.138 246.7)",
+          "oklch(61% 0.138 246.7)",
+          "oklch(72% 0.138 246.7)",
+          "oklch(84% 0.138 246.7)",
+          "oklch(95% 0.138 246.7)"
+        ]
+      },
+      "danger": {
+        "role": "state",
+        "displayName": "Danger",
+        "canonical": "#FF8A8A",
+        "tonalRamp": [
+          "oklch(15% 0.142 20.9)",
+          "oklch(26% 0.142 20.9)",
+          "oklch(38% 0.142 20.9)",
+          "oklch(49% 0.142 20.9)",
+          "oklch(61% 0.142 20.9)",
+          "oklch(72% 0.142 20.9)",
+          "oklch(84% 0.142 20.9)",
+          "oklch(95% 0.142 20.9)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The home page's h1 only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Home section titles, the 404 title, and a tool page's h1 (--t-tool)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Tool names in list rows and the guide's headings."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The sentence under each h1, muted, at 64ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Everything else; prose at 64ch, ligatures off."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase metadata and control names: legends, the header's Tools, categories in rows, palette groups."
+      },
+      "kicker": {
+        "displayName": "Kicker",
+        "purpose": "The brand's // kicker over each page's h1, and nowhere else."
+      },
+      "preview": {
+        "displayName": "Preview",
+        "purpose": "Monocraft, for Minecraft text in previews and game-text inputs only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "dialog",
+        "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+        "purpose": "The command palette only."
+      },
+      {
+        "name": "field-focus",
+        "value": "0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent)",
+        "purpose": "The ring round a focused field."
+      },
+      {
+        "name": "game-text-shadow",
+        "value": "0.125em 0.125em 0 <quarter of the span's colour>",
+        "purpose": "Inside Minecraft previews only, as text-shadow."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Expo out: every transition and the hero."
+      },
+      {
+        "name": "hover",
+        "value": "160–200ms",
+        "purpose": "Hover and focus transitions on links, pills, fields and rows."
+      },
+      {
+        "name": "hero-rise",
+        "value": "1800ms",
+        "purpose": "The home horizon rising from 14% lower and 20% opacity."
+      },
+      {
+        "name": "hero-settle",
+        "value": "1000ms, 90ms stagger",
+        "purpose": "The home hero copy settling 0.75rem."
+      },
+      {
+        "name": "obfuscate",
+        "value": "60ms",
+        "purpose": "Obfuscated preview text churn; frozen under reduced motion."
+      },
+      {
+        "name": "copied",
+        "value": "1600ms",
+        "purpose": "How long Copy reads Copied."
+      },
+      {
+        "name": "url-write",
+        "value": "250ms",
+        "purpose": "Debounce before a tool writes its settings to the URL."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "40rem"
+      },
+      {
+        "name": "md",
+        "value": "48rem"
+      },
+      {
+        "name": "lg",
+        "value": "64rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one primary action per view: Find a tool on home, Copy on a tool.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Find a tool</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;min-height:2.75rem;padding:0 1.5rem;border:1px solid var(--rule,#222B3B);border-radius:999px;font-family:\"JetBrains Mono Variable\", ui-monospace, monospace;font-size:0.875rem;font-weight:500;cursor:pointer;transition:border-color 200ms cubic-bezier(0.16,1,0.3,1),background-color 200ms cubic-bezier(0.16,1,0.3,1),transform 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-primary{background:var(--accent,#5CB4FF);border-color:var(--accent,#5CB4FF);color:var(--bg,#06080D);font-weight:600}.ds-btn-primary:hover{background:color-mix(in oklch,var(--accent,#5CB4FF) 88%,white)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid var(--accent,#5CB4FF);outline-offset:3px}"
+    },
+    {
+      "name": "Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Every other action: a hairline pill that warms toward Ion Blue on hover.",
+      "html": "<button class=\"ds-btn-default\">Make gradient text</button>",
+      "css": ".ds-btn-default{display:inline-flex;align-items:center;min-height:2.75rem;padding:0 1.5rem;border:1px solid var(--rule,#222B3B);border-radius:999px;background:color-mix(in srgb,var(--raised,#0A0E16) 70%,transparent);color:var(--text,#EDF1F7);font-family:\"JetBrains Mono Variable\", ui-monospace, monospace;font-size:0.875rem;font-weight:500;cursor:pointer;transition:border-color 200ms cubic-bezier(0.16,1,0.3,1),transform 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-default:hover{border-color:color-mix(in oklch,var(--accent,#5CB4FF) 55%,var(--rule,#222B3B))}.ds-btn-default:active{transform:translateY(1px)}.ds-btn-default:focus-visible{outline:2px solid var(--accent,#5CB4FF);outline-offset:3px}.ds-btn-default:disabled{opacity:0.45;cursor:not-allowed;border-color:var(--rule,#222B3B);transform:none}"
+    },
+    {
+      "name": "Choice Pills",
+      "kind": "chip",
+      "refersTo": "choice-selected",
+      "description": "Compact pills backed by real radio buttons: the format picker and toggles.",
+      "html": "<fieldset class=\"ds-choices\"><legend class=\"ds-label\">Format</legend><label class=\"ds-choice\"><input type=\"radio\" name=\"f\" checked>MiniMessage</label><label class=\"ds-choice\"><input type=\"radio\" name=\"f\">&amp;#RRGGBB</label><label class=\"ds-choice\"><input type=\"radio\" name=\"f\">JSON</label></fieldset>",
+      "css": ".ds-choices{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:0.5rem}.ds-label{width:100%;margin-bottom:0.5rem;font-family:\"JetBrains Mono Variable\", ui-monospace, monospace;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted,#8A93A6)}.ds-choice{display:inline-flex;align-items:center;min-height:2.25rem;padding:0 1rem;border:1px solid var(--rule,#222B3B);border-radius:999px;background:color-mix(in srgb,var(--raised,#0A0E16) 70%,transparent);color:var(--text,#EDF1F7);font-family:\"JetBrains Mono Variable\", ui-monospace, monospace;font-size:0.875rem;font-weight:500;cursor:pointer;transition:border-color 200ms cubic-bezier(0.16,1,0.3,1)}.ds-choice input{position:absolute;opacity:0;width:1px;height:1px}.ds-choice:hover{border-color:color-mix(in oklch,var(--accent,#5CB4FF) 55%,var(--rule,#222B3B))}.ds-choice:has(:checked){border-color:var(--accent,#5CB4FF);background:color-mix(in srgb,var(--accent,#5CB4FF) 14%,transparent)}.ds-choice:has(:focus-visible){outline:2px solid var(--accent,#5CB4FF);outline-offset:3px}"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Text inputs and textareas: space fill, hairline, 12px radius, Ion Blue focus ring.",
+      "html": "<label class=\"ds-field-wrap\"><span class=\"ds-field-label\">Text</span><input class=\"ds-field\" value=\"Welcome to the server\"></label>",
+      "css": ".ds-field-wrap{display:block}.ds-field-label{display:block;margin-bottom:0.5rem;font-family:\"JetBrains Mono Variable\", ui-monospace, monospace;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted,#8A93A6)}.ds-field{width:100%;min-height:2.75rem;padding:0.55rem 0.9rem;background:var(--raised,#0A0E16);border:1px solid var(--rule,#222B3B);border-radius:12px;color:var(--text,#EDF1F7);caret-color:var(--accent,#5CB4FF);font-family:\"JetBrains Mono Variable\", ui-monospace, monospace;font-size:1rem;transition:border-color 160ms cubic-bezier(0.16,1,0.3,1),box-shadow 160ms cubic-bezier(0.16,1,0.3,1)}.ds-field:hover{border-color:color-mix(in oklch,var(--accent,#5CB4FF) 35%,var(--rule,#222B3B))}.ds-field:focus-visible{outline:none;border-color:var(--accent,#5CB4FF);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent,#5CB4FF) 22%,transparent)}.ds-field[aria-invalid=true]{border-color:var(--danger,#FF8A8A)}"
+    },
+    {
+      "name": "Output",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "The result panel: format name, where it's used, the Copy pill, and the text on void.",
+      "html": "<div class=\"ds-panel\"><div class=\"ds-out-head\"><div><h3 class=\"ds-out-title\">MiniMessage</h3><p class=\"ds-out-hint\">Paper, Velocity, Adventure</p></div><button class=\"ds-copy\">Copy</button></div><pre class=\"ds-out\">&lt;bold&gt;&lt;#5CB4FF&gt;W&lt;#7BA9FF&gt;e…</pre></div>",
+      "css": ".ds-panel{background:var(--raised,#0A0E16);border:1px solid var(--rule,#222B3B);border-radius:12px;padding:1rem;font-family:\"JetBrains Mono Variable\", ui-monospace, monospace;color:var(--text,#EDF1F7)}.ds-out-head{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:0.5rem}.ds-out-title{margin:0;font-size:0.875rem;font-weight:600}.ds-out-hint{margin:0;font-size:0.75rem;color:var(--muted,#8A93A6)}.ds-copy{min-height:2.25rem;padding:0 1rem;border:1px solid var(--accent,#5CB4FF);border-radius:999px;background:var(--accent,#5CB4FF);color:var(--bg,#06080D);font:600 0.875rem \"JetBrains Mono Variable\", ui-monospace, monospace;cursor:pointer}.ds-copy:hover{background:color-mix(in oklch,var(--accent,#5CB4FF) 88%,white)}.ds-copy:focus-visible{outline:2px solid var(--accent,#5CB4FF);outline-offset:3px}.ds-out{margin:0;max-height:12rem;overflow:auto;background:var(--bg,#06080D);border-radius:8px;padding:0.75rem;font-size:0.875rem;white-space:pre-wrap;word-break:break-all}"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "description": "The studio's shell: XENA STUDIOS | TOOLS, the search pill, GitHub.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"#\"><strong>XENA STUDIOS</strong><span class=\"ds-site\">Tools</span></a><nav class=\"ds-nav\"><button class=\"ds-search\">Find a tool <kbd>⌘K</kbd></button><a href=\"#\">GitHub</a></nav></header>",
+      "css": ".ds-header{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:4rem;padding:0 1.5rem;border-bottom:1px solid color-mix(in srgb,var(--rule,#222B3B) 70%,transparent);background:color-mix(in srgb,var(--bg,#06080D) 80%,transparent);backdrop-filter:blur(12px) saturate(1.5);font-family:\"JetBrains Mono Variable\", ui-monospace, monospace}.ds-brand{display:flex;align-items:center;gap:0.75rem;color:var(--text,#EDF1F7);text-decoration:none;font-size:0.8125rem;letter-spacing:0.1em}.ds-site{border-left:1px solid var(--rule,#222B3B);padding-left:0.75rem;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted,#8A93A6)}.ds-nav{display:flex;align-items:center;gap:1.5rem}.ds-nav a{color:var(--muted,#8A93A6);text-decoration:none;font-size:0.875rem}.ds-nav a:hover{color:var(--text,#EDF1F7)}.ds-search{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.25rem;padding:0.25rem 0.5rem 0.25rem 1rem;border:1px solid var(--rule,#222B3B);border-radius:999px;background:color-mix(in srgb,var(--raised,#0A0E16) 70%,transparent);color:var(--muted,#8A93A6);font:0.875rem \"JetBrains Mono Variable\", ui-monospace, monospace;cursor:pointer;transition:border-color 200ms cubic-bezier(0.16,1,0.3,1),color 200ms cubic-bezier(0.16,1,0.3,1)}.ds-search:hover{border-color:color-mix(in srgb,var(--accent,#5CB4FF) 55%,transparent);color:var(--text,#EDF1F7)}.ds-search:focus-visible{outline:2px solid var(--accent,#5CB4FF);outline-offset:3px}.ds-search kbd{border:1px solid var(--rule,#222B3B);border-radius:999px;padding:0 0.5rem;font-size:0.75rem;line-height:1.25rem}"
+    },
+    {
+      "name": "Tool Row",
+      "kind": "custom",
+      "description": "A hairline list row on home: category label and name, summary, inward chevron.",
+      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-row-name\"><span class=\"ds-row-cat\">Text</span><strong>Gradient Text</strong></span><span class=\"ds-row-sum\">Colour text with a smooth gradient for chat, ranks, MOTDs and item names.</span><span class=\"ds-more\">Open</span></a>",
+      "css": ".ds-row{display:grid;grid-template-columns:14rem minmax(0,1fr) auto;align-items:center;gap:0.25rem 1.5rem;padding:1.5rem 0.75rem;border-top:1px solid var(--rule,#222B3B);border-bottom:1px solid var(--rule,#222B3B);color:var(--text,#EDF1F7);text-decoration:none;font-family:\"JetBrains Mono Variable\", ui-monospace, monospace;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1)}.ds-row:hover{background:color-mix(in srgb,var(--raised,#0A0E16) 60%,transparent)}.ds-row:focus-visible{outline:2px solid var(--accent,#5CB4FF);outline-offset:3px}.ds-row-name{display:grid;gap:0.25rem}.ds-row-name strong{font-size:1.25rem;font-weight:600;letter-spacing:-0.02em}.ds-row-cat{font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted,#8A93A6)}.ds-row-sum{color:var(--muted,#8A93A6)}.ds-more{font-size:0.875rem;font-weight:500}.ds-more::after{content:'';display:inline-block;width:0.45em;height:0.45em;margin-left:0.5em;border-top:1.4px solid currentColor;border-right:1.4px solid currentColor;transform:translateY(-0.1em) rotate(45deg);transition:transform 200ms cubic-bezier(0.16,1,0.3,1)}.ds-row:hover .ds-more::after{transform:translate(0.2em,-0.1em) rotate(45deg)}"
+    },
+    {
+      "name": "Minecraft Preview",
+      "kind": "custom",
+      "refersTo": "preview-chat",
+      "description": "McText: game text on chat's translucent black, with the quarter-colour drop shadow.",
+      "html": "<div class=\"ds-mc\"><span style=\"color:#5CB4FF;--s:#172D3F\">Welcome </span><span style=\"color:#FF55FF;--s:#3F153F\"><b>to the server</b></span></div>",
+      "css": ".ds-mc{font-family:Monocraft,ui-monospace,monospace;font-size:1.5rem;line-height:1.25;padding:1rem 0.75rem;background:rgba(0,0,0,0.5);border-radius:6px;white-space:pre-wrap;font-variant-ligatures:none}.ds-mc span{text-shadow:0.125em 0.125em 0 var(--s)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Studio Instrument",
+    "overview": "Tools is the Xena Studios tools site, and it has no identity of its own: it joins the studio's design system exactly as Brand (brand.xenastudios.co) does, with the same tokens, type, hairlines and planet horizon as xenastudios.co. Every colour and logo comes from [xena-studios/brand](https://github.com/xena-studios/brand), synced into `apps/web/src/brand/` with `pnpm brand:sync`; `apps/web/src/styles.css` only aliases those tokens and adds scale. The chrome is calm enough to disappear. The only thing on the page that looks like the game is the preview, drawn by the game's own rules.\n\nEach tool is one working bench: a compact header, the preview at full width, then the controls and the output side by side, with the copy button in the first screen. The home page is the studio's page hero (kicker, title, lead, a primary pill, the rising horizon) followed by hairline rows: the tools, how they work, and what's next. Density is moderate and even; the space between sections does the grouping, not boxes.\n\nIt reads like an engineer wrote it: plain words, real format and plugin names, and a straight note wherever the preview is only close.",
+    "keyCharacteristics": [
+      "Deep-space neutrals with Ion Blue as the only accent.",
+      "One family, JetBrains Mono, for all chrome; Monocraft only for game text.",
+      "Hairline rows and 12px panels, never card grids.",
+      "999px pills for every control.",
+      "The planet horizon is the one picture, and the home hero is the one authored entrance.",
+      "Every tool's settings live in the link."
+    ],
+    "rules": [
+      {
+        "name": "The Brand Repo Rule",
+        "body": "Every site colour is a brand token, synced with `pnpm brand:sync` and never retyped. Danger is the one addition.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Accent Rule",
+        "body": "Ion Blue is the only accent. Selected, focused, primary and current all use it; nothing else gets a colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Words First Rule",
+        "body": "Danger is always paired with words saying what's wrong; colour never carries meaning alone.",
+        "section": "colors"
+      },
+      {
+        "name": "The sRGB Tint Rule",
+        "body": "Translucent colours mix in sRGB (`color-mix(in srgb, X, transparent)`); oklch mixing with `transparent` drifts the hue. Mixing two solid colours (a hover border warming toward Ion Blue) may use oklch.",
+        "section": "colors"
+      },
+      {
+        "name": "The Game Colours Stay In The Game Rule",
+        "body": "Minecraft's colours, gradient presets and the colour swatches appear only inside previews and the controls that set them, never as site colours.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Kicker Rule",
+        "body": "The brand's `//` kicker (`// TOOLS`, `// TEXT`, `// 404`) sits over each page's h1 and nowhere else, as on xenastudios.co. Nothing else is an eyebrow over a heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Monocraft Rule",
+        "body": "Monocraft is for game text only: the preview, and an input whose content becomes game text (the gradient tool's text field). It's monospaced and the game's font isn't, so widths are close, not exact, and the guides say so.",
+        "section": "typography"
+      },
+      {
+        "name": "The Logo Is Artwork Rule",
+        "body": "The wordmark is the brand's SVG, inlined in `currentColor` and cropped to its ink. Its typeface is never set as live text.",
+        "section": "typography"
+      },
+      {
+        "name": "The Output First Rule",
+        "body": "At 1440×900 the preview, the controls and the copy button are in the first screen. On a phone, while the output panel is off screen, a fixed bar at the bottom keeps its copy button in reach.",
+        "section": "layout"
+      },
+      {
+        "name": "The Rows Not Cards Rule",
+        "body": "Lists are hairline rows that tint to space at 60% on hover. No card grids.",
+        "section": "layout"
+      },
+      {
+        "name": "The Glass Bar Rule",
+        "body": "Anything pinned over content (header, copy bar) is void at 80–90% with a backdrop blur and a hairline edge, never a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do take every colour, logo and scene from the brand repo (`pnpm brand:sync`); add only `danger`, and only for errors.",
+      "Do keep the preview and the copy button in the first screen, and the copy button in reach on a phone.",
+      "Do build every control as a pill backed by a real radio button, checkbox or button.",
+      "Do name formats by where they're used (\"MiniMessage\", \"&#RRGGBB\", \"JSON for /tellraw\") and say plainly where the preview is only close.",
+      "Do keep each tool's settings in its URL, with the prerendered HTML matching the defaults.",
+      "Do keep one authored moment per page: the home horizon rises (1.8s, expo out) and the hero copy settles in a 90ms stagger. Hover and focus run 160–200ms on the same curve, and reduced motion collapses all of it.",
+      "Do draw previews by the game's rules: colours, the quarter-colour shadow, decorations, obfuscation and hover text."
+    ],
+    "donts": [
+      "Don't add a second accent colour, or use game colours for the chrome.",
+      "Don't use game textures, the game's own font or Mojang's logos anywhere, or put pixel-art styling on the chrome; the game's look belongs inside previews only.",
+      "Don't add stars, particles, glows beyond the horizon, gradient text on the chrome, angled panels or card grids.",
+      "Don't put a kicker or eyebrow over anything but a page's h1.",
+      "Don't use Monocraft outside previews and game-text inputs.",
+      "Don't use Unicode arrows or emoji as icons; the External arrow and the CSS chevron are the only ones.",
+      "Don't animate on scroll or on entry beyond the home hero.",
+      "Don't inline scripts the CSP hasn't hashed, or inline fonts as `data:` URLs.",
+      "Don't show a tool that isn't built as if it were; planned tools are plain rows under \"Next up\"."
+    ]
+  }
+}
