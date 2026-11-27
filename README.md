@@ -2,9 +2,9 @@
 
 **Tools for running a Minecraft server.**
 
-Free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), for tools.xenastudios.co. Every tool runs in your browser, keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
+Free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), at [tools.xenastudios.co](https://tools.xenastudios.co). Every tool runs in your browser, keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
 
-> **Status:** in development, not yet live. Gradient Text and Text Converter work; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
+> **Status:** early. Gradient Text and Text Converter are live; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 | Tool                                                          | What it does                                                                                                                   |
 | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
