@@ -34,11 +34,7 @@ export function FormatPicker<T extends string>({
       <legend className="label mb-2">{label}</legend>
       <div className="flex flex-wrap gap-2">
         {options.map((o) => (
-          <label
-            key={o.id}
-            title={o.usedBy}
-            className="btn has-checked:border-accent has-checked:bg-accent/20 has-checked:text-text has-focus-visible:outline-2 has-focus-visible:outline-accent"
-          >
+          <label key={o.id} title={o.usedBy} className="button compact choice">
             <input
               type="radio"
               className="sr-only"
@@ -65,7 +61,7 @@ export function Toggle({
   children: React.ReactNode;
 }) {
   return (
-    <label className="btn has-checked:border-accent has-checked:bg-accent/20 has-checked:text-text has-focus-visible:outline-2 has-focus-visible:outline-accent">
+    <label className="button compact choice">
       <input
         type="checkbox"
         className="sr-only"

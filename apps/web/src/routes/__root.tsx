@@ -9,12 +9,13 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: `${SITE.name}: ${SITE.tagline}` },
+      { title: SITE.name },
       { name: "description", content: SITE.tagline },
-      { name: "theme-color", content: "#0A0A13" },
+      { name: "theme-color", content: "#06080D" },
       { property: "og:site_name", content: SITE.name },
       { property: "og:type", content: "website" },
       { property: "og:image", content: `${SITE.url}/og.png` },
+      { property: "og:image:alt", content: "XENA STUDIOS over a planet horizon." },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -36,16 +37,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="flex min-h-dvh flex-col">
         <a
-          href="#content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-3 focus:py-2 focus:text-on-accent"
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-bg focus:no-underline"
         >
           Skip to content
         </a>
         <CommandPaletteProvider>
           <Header />
-          <div id="content" className="flex-1">
-            {children}
-          </div>
+          <div className="flex flex-1 flex-col">{children}</div>
           <Footer />
         </CommandPaletteProvider>
         <Scripts />
@@ -56,9 +55,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function NotFound() {
   return (
-    <main className="wrap pt-16">
-      <p className="kicker mb-3">404</p>
-      <h1 className="mb-3 text-3xl sm:text-5xl">No tool here</h1>
+    <main id="main" className="wrap pt-[var(--s-8)]">
+      <p className="kicker mb-6">{"// 404"}</p>
+      <h1 className="mb-4 text-[length:var(--t-h2)]">No tool here</h1>
       <p className="text-muted">
         That page doesn't exist. Press <kbd>⌘K</kbd> to find a tool, or <a href="/">see them all</a>
         .

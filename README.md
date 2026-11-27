@@ -1,8 +1,8 @@
-![Xena Tools by Xena Studios. The clamp icon and the Xena Tools wordmark over an Arc Violet planet horizon, with the headline "Server tools. Free and open source." and a list of the tools.](https://cdn.jsdelivr.net/gh/xena-studios/brand@1/github/tools-banner.png)
+![Tools by Xena Studios. XENA STUDIOS and the title "Tools" over the Ion Blue planet horizon, with "Tools for running a Minecraft server."](https://cdn.jsdelivr.net/gh/xena-studios/brand@1/github/tools-banner.png)
 
 **Tools for running a Minecraft server.**
 
-Xena Tools is a set of free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), at [tools.xenastudios.co](https://tools.xenastudios.co). Every tool runs in your browser, keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
+Free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), for tools.xenastudios.co. Every tool runs in your browser, keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
 
 > **Status:** in development, not yet live. Gradient Text and Text Converter work; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -45,6 +45,6 @@ Issues and pull requests are welcome. The org's [contributing guide](https://git
 
 ## Licence
 
-[AGPL-3.0](LICENSE). If you run a changed copy of the site for other people, you have to share its source. The Xena Tools and Xena Studios logos are the [brand's](https://github.com/xena-studios/brand/blob/main/LICENSE), not covered by the AGPL. The preview font is [Monocraft](https://github.com/IdreesInc/Monocraft), under the [SIL Open Font License](apps/web/src/fonts/Monocraft-OFL.txt).
+[AGPL-3.0](LICENSE). If you run a changed copy of the site for other people, you have to share its source. The Xena Studios logos and the horizon are the [brand's](https://github.com/xena-studios/brand/blob/main/LICENSE), not covered by the AGPL. The preview font is [Monocraft](https://github.com/IdreesInc/Monocraft), under the [SIL Open Font License](apps/web/src/fonts/Monocraft-OFL.txt).
 
 Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.

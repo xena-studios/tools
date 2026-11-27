@@ -69,7 +69,7 @@ interface State {
 }
 
 const DEFAULTS: State = {
-  text: "Xena Tools",
+  text: "Welcome to the server",
   colors: ["#5CB4FF", "#FF55FF"],
   decorations: ["bold"],
   interpolation: "oklab",
@@ -178,7 +178,7 @@ function GradientTool() {
                     value={color.toLowerCase()}
                     onChange={(e) => setColor(i, e.target.value)}
                     aria-label={`Colour ${i + 1}`}
-                    className="h-9 w-12 cursor-pointer rounded-md border border-rule bg-raised p-1"
+                    className="h-11 w-14 shrink-0 cursor-pointer rounded-[var(--radius)] border border-rule bg-raised p-1.5"
                   />
                   <input
                     key={color}
@@ -191,7 +191,7 @@ function GradientTool() {
                   />
                   <button
                     type="button"
-                    className="btn"
+                    className="button"
                     disabled={state.colors.length <= 2}
                     onClick={() => update({ colors: state.colors.filter((_, j) => j !== i) })}
                     aria-label={`Remove colour ${i + 1}`}
@@ -204,7 +204,7 @@ function GradientTool() {
             <div className="mt-3 flex flex-wrap gap-2">
               <button
                 type="button"
-                className="btn"
+                className="button compact"
                 disabled={state.colors.length >= 10}
                 onClick={() =>
                   update({ colors: [...state.colors, state.colors.at(-1) ?? "#FFFFFF"] })
@@ -214,12 +214,12 @@ function GradientTool() {
               </button>
               <button
                 type="button"
-                className="btn"
+                className="button compact"
                 onClick={() => update({ colors: [...state.colors].reverse() })}
               >
                 Reverse
               </button>
-              <button type="button" className="btn" onClick={reset}>
+              <button type="button" className="button compact" onClick={reset}>
                 Start over
               </button>
             </div>
@@ -232,7 +232,7 @@ function GradientTool() {
                 <button
                   key={p.name}
                   type="button"
-                  className="btn"
+                  className="button compact"
                   onClick={() => update({ colors: p.colors })}
                 >
                   {p.name}
@@ -284,7 +284,7 @@ function GradientTool() {
           </fieldset>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 self-start lg:sticky lg:top-24">
           <FormatPicker
             options={FORMATS}
             value={state.format}

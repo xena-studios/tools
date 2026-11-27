@@ -1,32 +1,52 @@
 @import "tailwindcss";
 @import "@fontsource-variable/jetbrains-mono";
-@import "@fontsource/ibm-plex-sans/400.css";
-@import "@fontsource/ibm-plex-sans/600.css";
-@import "@fontsource/ibm-plex-sans/700.css";
-@import "./brand/tools.css";
+@import "./brand/colors.css";
 
 /*
- * Everything visual comes from Xena Tools' brand tokens (src/brand, synced
- * from xena-studios/brand with `pnpm brand:sync`): Arc Violet on steel.
- * This file maps them to the site's names and adds scale.
- *
- * Arc is 4:1 on steel: right for headlines, the mark and controls. Body-size
- * links stay in the text colour, with arc for the underline.
+ * The Xena Studios design system, as on xenastudios.co and brand.xenastudios.co:
+ * every colour is a brand token (src/brand, synced from xena-studios/brand with
+ * `pnpm brand:sync`); this file only adds scale and maps the tokens for Tailwind.
  */
 :root {
-  --bg: var(--tools-steel);
-  --raised: var(--tools-steel-raised);
-  --surface: color-mix(in srgb, var(--tools-steel-raised) 70%, var(--tools-steel-rule));
-  --rule: var(--tools-steel-rule);
-  --muted: var(--tools-muted);
-  --text: var(--tools-text);
-  --accent: var(--tools-arc);
-  --on-accent: var(--tools-on-arc);
+  --bg: var(--xena-void);
+  --raised: var(--xena-space);
+  --surface: var(--xena-surface);
+  --rule: var(--xena-line);
+  --muted: var(--xena-muted);
+  --text: var(--xena-text);
+  --accent: var(--xena-accent);
+  /* The studio has no error colour; this is the one state colour the tools add,
+     always paired with words, never alone. */
+  --danger: #ff8a8a;
 
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --radius: 12px;
-  --page: clamp(1rem, 4vw, 3rem);
+  --font: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* 4pt spacing scale, fluid at the large end. */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: clamp(4rem, 3rem + 4vw, 6rem);
+
+  /* Type: the studio's scale. */
+  --t-label: 0.75rem;
+  --t-small: 0.875rem;
+  --t-body: 1rem;
+  --t-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --t-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --t-h2: clamp(1.75rem, 1.3rem + 1.9vw, 2.75rem);
+  --t-h1: clamp(1.75rem, 1.1rem + 3.9vw, 4.5rem);
+  /* A tool page's title: the task comes first, so it stays a step below the home page's. */
+  --t-tool: clamp(1.75rem, 1.3rem + 1.9vw, 2.75rem);
+
+  --page: clamp(1.25rem, 4vw, 3rem);
   --max: 76rem;
+  --measure: 64ch;
+  --radius: 12px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1); /* expo out */
 
   color-scheme: dark;
 }
@@ -39,9 +59,8 @@
   --color-muted: var(--muted);
   --color-text: var(--text);
   --color-accent: var(--accent);
-  --color-on-accent: var(--on-accent);
-  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font);
+  --font-sans: var(--font);
   --font-mc: "Monocraft", ui-monospace, monospace;
   --radius-box: var(--radius);
   --ease-out-expo: var(--ease);
@@ -64,23 +83,26 @@
   html {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font-sans);
+    font-family: var(--font);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 5rem;
     scrollbar-color: var(--rule) var(--bg);
   }
   body {
     margin: 0;
     background: var(--bg);
+    font-size: var(--t-body);
     line-height: 1.7;
     font-variant-ligatures: none;
   }
   h1,
   h2,
   h3 {
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.12;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
   p {
@@ -88,15 +110,27 @@
   }
   a {
     color: inherit;
-    text-decoration-color: var(--accent);
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
     text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+    transition:
+      color 160ms var(--ease),
+      text-decoration-color 160ms var(--ease);
+  }
+  a:hover {
+    text-decoration-color: currentColor;
   }
   ::selection {
     background: color-mix(in srgb, var(--accent) 35%, transparent);
+    color: var(--text);
   }
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
+    border-radius: 2px;
+  }
+  ::placeholder {
+    color: var(--muted);
   }
   input,
   textarea,
@@ -105,96 +139,171 @@
     font: inherit;
     color: inherit;
   }
+  input,
+  textarea {
+    caret-color: var(--accent);
+  }
+  code,
+  kbd,
+  pre {
+    font-family: var(--font);
+  }
 }
 
 @layer components {
   .wrap {
     width: 100%;
-    max-width: var(--max);
+    max-width: calc(var(--max) + var(--page) * 2);
     margin-inline: auto;
     padding-inline: var(--page);
   }
-  /* The brand's `//` kicker, over each page's h1 and nowhere else. */
+  /* The brand's // kicker: over each page's title, and nowhere else. */
   .kicker {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
+    font-size: var(--t-label);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
-  }
-  .kicker::before {
-    content: "// ";
   }
   .label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: var(--t-label);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
   }
+  .lead {
+    max-width: var(--measure);
+    font-size: var(--t-lead);
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  /* Pills, 44px: the studio's buttons. Primary is solid Ion Blue with void text;
+     the rest are hairline outlines that warm toward Ion Blue on hover. */
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-2);
+    min-height: 2.75rem;
+    padding: 0 var(--s-5);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--raised) 70%, transparent);
+    font-size: var(--t-small);
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      border-color 200ms var(--ease),
+      background-color 200ms var(--ease),
+      color 200ms var(--ease),
+      transform 200ms var(--ease);
+  }
+  .button:hover {
+    border-color: color-mix(in oklch, var(--accent) 55%, var(--rule));
+  }
+  .button:active {
+    transform: translateY(1px);
+  }
+  .button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    border-color: var(--rule);
+    transform: none;
+  }
+  .button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+  .button.primary:hover {
+    background: color-mix(in oklch, var(--accent) 88%, white);
+  }
+  /* A smaller pill for dense rows of choices inside a tool. */
+  .button.compact {
+    min-height: 2.25rem;
+    padding: 0 var(--s-4);
+  }
+  /* A pill that is a radio button or checkbox: selected is an Ion Blue edge and tint,
+     with the text kept in the text colour. */
+  .choice:has(:checked) {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+  }
+  .choice:has(:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
   .field {
     width: 100%;
+    min-height: 2.75rem;
     background: var(--raised);
     border: 1px solid var(--rule);
-    border-radius: 8px;
-    padding: 0.5rem 0.75rem;
-    transition: border-color 160ms var(--ease);
+    border-radius: var(--radius);
+    padding: 0.55rem 0.9rem;
+    transition:
+      border-color 160ms var(--ease),
+      box-shadow 160ms var(--ease);
   }
   .field:hover {
-    border-color: color-mix(in srgb, var(--accent) 35%, var(--rule));
+    border-color: color-mix(in oklch, var(--accent) 35%, var(--rule));
   }
   .field:focus-visible {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
   }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    min-height: 2.25rem;
-    padding: 0 1rem;
-    border-radius: 999px;
-    border: 1px solid var(--rule);
-    background: transparent;
-    font-size: 0.875rem;
-    cursor: pointer;
-    white-space: nowrap;
-    transition:
-      border-color 160ms var(--ease),
-      background-color 160ms var(--ease),
-      color 160ms var(--ease);
+  .field[aria-invalid="true"] {
+    border-color: var(--danger);
   }
-  .btn:hover {
-    border-color: color-mix(in srgb, var(--accent) 55%, var(--rule));
-  }
-  .btn-primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--on-accent);
-    font-weight: 600;
-  }
-  .btn-primary:hover {
-    background: color-mix(in srgb, var(--accent) 88%, white);
-  }
+
   .panel {
     background: var(--raised);
     border: 1px solid var(--rule);
     border-radius: var(--radius);
   }
+
+  /* A link deeper into this site: the studio's inward chevron, drawn in CSS. */
+  .more::after {
+    content: "";
+    display: inline-block;
+    width: 0.45em;
+    height: 0.45em;
+    margin-left: 0.5em;
+    border-top: 1.4px solid currentColor;
+    border-right: 1.4px solid currentColor;
+    transform: translateY(-0.1em) rotate(45deg);
+    transition: transform 200ms var(--ease);
+  }
+  .group:hover .more::after,
+  .more:hover::after,
+  .more:focus-visible::after {
+    transform: translate(0.2em, -0.1em) rotate(45deg);
+  }
+
   .prose-tool {
-    max-width: 64ch;
+    max-width: var(--measure);
     color: var(--muted);
   }
   .prose-tool h2 {
     color: var(--text);
-    font-size: 1.25rem;
-    margin: 2rem 0 0.5rem;
+    font-size: var(--t-h3);
+    margin: var(--s-7) 0 var(--s-3);
+  }
+  .prose-tool h2:first-child {
+    margin-top: 0;
+  }
+  .prose-tool strong {
+    color: var(--text);
+    font-weight: 600;
   }
   .prose-tool p,
   .prose-tool li {
-    margin: 0.5rem 0;
+    margin: var(--s-2) 0;
   }
   .prose-tool code {
     color: var(--text);
@@ -203,15 +312,64 @@
     padding: 0.1em 0.35em;
     font-size: 0.875em;
   }
-  .prose-tool ol,
   .prose-tool ul {
-    padding-left: 1.25rem;
+    list-style: none;
+    padding: 0;
   }
-  .prose-tool ol {
-    list-style: decimal;
+  .prose-tool li {
+    padding-left: var(--s-5);
+    position: relative;
   }
-  .prose-tool ul {
-    list-style: disc;
+  .prose-tool li::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: 0.8em;
+    width: 0.35rem;
+    height: 1px;
+    background: var(--accent);
+  }
+}
+
+/* The ⌘K palette's group names, as the studio's labels. */
+.palette-group [cmdk-group-heading] {
+  padding: var(--s-2) var(--s-3);
+  font-size: var(--t-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* The brand's horizon: the planet body fades into the page, never a hard edge. */
+svg.horizon {
+  -webkit-mask-image: linear-gradient(to bottom, var(--bg) 55%, transparent);
+  mask-image: linear-gradient(to bottom, var(--bg) 55%, transparent);
+}
+
+/* The page's one authored moment, as on the studio's sites: the horizon rises and
+   the hero copy settles in a short stagger. Nothing else animates on entry. */
+.hero-rise {
+  animation: rise 1800ms var(--ease) both;
+}
+.hero-copy > * {
+  animation: settle 1000ms var(--ease) both;
+}
+.hero-copy > :nth-child(2) {
+  animation-delay: 90ms;
+}
+.hero-copy > :nth-child(n + 3) {
+  animation-delay: 180ms;
+}
+@keyframes rise {
+  from {
+    transform: translateY(14%);
+    opacity: 0.2;
+  }
+}
+@keyframes settle {
+  from {
+    transform: translateY(0.75rem);
+    opacity: 0;
   }
 }
 
@@ -251,12 +409,13 @@
   text-shadow: 0.125em 0.125em 0 var(--shadow);
 }
 
-/* Reduced motion beats every component's own timing, so !important is the point. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
   }
 }

@@ -11,7 +11,10 @@
       "!**/routeTree.gen.ts",
       "!**/worker-configuration.d.ts",
       "!apps/web/src/brand",
-      "!apps/web/public"
+      "!apps/web/public",
+      "!.agents",
+      "!**/.impeccable",
+      "!**/*.md"
     ]
   },
   "formatter": {

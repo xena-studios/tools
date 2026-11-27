@@ -19,17 +19,14 @@ if (!fs.existsSync(path.join(BRAND, "tokens/colors.css"))) {
 
 // [from (in brand), to (in apps/web)]
 const files: [string, string][] = [
+  // The site uses the studio's own design system, as brand.xenastudios.co does.
   ["tokens/colors.css", "src/brand/colors.css"],
-  ["tokens/tools.css", "src/brand/tools.css"],
-  ["tokens/tools.json", "src/brand/tools.json"],
-  // The studio's endorsement, in the footer only.
+  ["logo/xena-studios.svg", "src/brand/logo/xena-studios.svg"],
   ["logo/xena.svg", "src/brand/logo/xena.svg"],
-  ["tools/logo-dark.svg", "src/brand/tools/logo-dark.svg"],
-  ["tools/mark.svg", "src/brand/tools/mark.svg"],
-  ["tools/icon.svg", "src/brand/tools/icon.svg"],
-  ["tools/favicon.svg", "public/favicon.svg"],
-  ["tools/apple-touch-icon.png", "public/apple-touch-icon.png"],
-  ["tools/og.png", "public/og.png"],
+  ["scene/horizon.svg", "src/brand/scene/horizon.svg"],
+  ["avatar/favicon.svg", "public/favicon.svg"],
+  ["avatar/apple-touch-icon.png", "public/apple-touch-icon.png"],
+  ["social/og-card.png", "public/og.png"],
 ];
 
 const missing = files.filter(([from]) => !fs.existsSync(path.join(BRAND, from)));
