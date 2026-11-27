@@ -1,0 +1,262 @@
+@import "tailwindcss";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "./brand/tools.css";
+
+/*
+ * Everything visual comes from Xena Tools' brand tokens (src/brand, synced
+ * from xena-studios/brand with `pnpm brand:sync`): Arc Violet on steel.
+ * This file maps them to the site's names and adds scale.
+ *
+ * Arc is 4:1 on steel: right for headlines, the mark and controls. Body-size
+ * links stay in the text colour, with arc for the underline.
+ */
+:root {
+  --bg: var(--tools-steel);
+  --raised: var(--tools-steel-raised);
+  --surface: color-mix(in srgb, var(--tools-steel-raised) 70%, var(--tools-steel-rule));
+  --rule: var(--tools-steel-rule);
+  --muted: var(--tools-muted);
+  --text: var(--tools-text);
+  --accent: var(--tools-arc);
+  --on-accent: var(--tools-on-arc);
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius: 12px;
+  --page: clamp(1rem, 4vw, 3rem);
+  --max: 76rem;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-raised: var(--raised);
+  --color-surface: var(--surface);
+  --color-rule: var(--rule);
+  --color-muted: var(--muted);
+  --color-text: var(--text);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mc: "Monocraft", ui-monospace, monospace;
+  --radius-box: var(--radius);
+  --ease-out-expo: var(--ease);
+}
+
+@font-face {
+  font-family: "Monocraft";
+  src: url("./fonts/Monocraft.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Monocraft";
+  src: url("./fonts/Monocraft-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scrollbar-color: var(--rule) var(--bg);
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    line-height: 1.7;
+    font-variant-ligatures: none;
+  }
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  a {
+    color: inherit;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 0.25em;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: var(--page);
+  }
+  /* The brand's `//` kicker, over each page's h1 and nowhere else. */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .kicker::before {
+    content: "// ";
+  }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .field {
+    width: 100%;
+    background: var(--raised);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    transition: border-color 160ms var(--ease);
+  }
+  .field:hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--rule));
+  }
+  .field:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.25rem;
+    padding: 0 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--rule);
+    background: transparent;
+    font-size: 0.875rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      border-color 160ms var(--ease),
+      background-color 160ms var(--ease),
+      color 160ms var(--ease);
+  }
+  .btn:hover {
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--rule));
+  }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+    font-weight: 600;
+  }
+  .btn-primary:hover {
+    background: color-mix(in srgb, var(--accent) 88%, white);
+  }
+  .panel {
+    background: var(--raised);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+  .prose-tool {
+    max-width: 64ch;
+    color: var(--muted);
+  }
+  .prose-tool h2 {
+    color: var(--text);
+    font-size: 1.25rem;
+    margin: 2rem 0 0.5rem;
+  }
+  .prose-tool p,
+  .prose-tool li {
+    margin: 0.5rem 0;
+  }
+  .prose-tool code {
+    color: var(--text);
+    background: var(--surface);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+    font-size: 0.875em;
+  }
+  .prose-tool ol,
+  .prose-tool ul {
+    padding-left: 1.25rem;
+  }
+  .prose-tool ol {
+    list-style: decimal;
+  }
+  .prose-tool ul {
+    list-style: disc;
+  }
+}
+
+/* Minecraft-style text previews. */
+.mc {
+  font-family: var(--font-mc);
+  line-height: 1.25;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-variant-ligatures: none;
+  font-feature-settings:
+    "liga" 0,
+    "calt" 0;
+}
+.mc-bold {
+  font-weight: 700;
+}
+.mc-italic {
+  font-style: italic;
+}
+.mc-underlined {
+  text-decoration: underline;
+  text-decoration-thickness: 0.125em;
+  text-underline-offset: 0.15em;
+}
+.mc-strikethrough {
+  text-decoration: line-through;
+  text-decoration-thickness: 0.125em;
+}
+.mc-underlined.mc-strikethrough {
+  text-decoration: underline line-through;
+}
+.mc-hover {
+  cursor: help;
+}
+.mc-shadow .mc-span {
+  text-shadow: 0.125em 0.125em 0 var(--shadow);
+}
+
+/* Reduced motion beats every component's own timing, so !important is the point. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

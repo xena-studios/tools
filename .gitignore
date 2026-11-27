@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.output/
+.tanstack/
+.wrangler/
+.DS_Store
+*.log
+*.local
+.env*
+.dev.vars*
+!.dev.vars.example
+.idea/
+.vscode/
+coverage/

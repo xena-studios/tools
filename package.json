@@ -1,0 +1,33 @@
+{
+  "name": "xena-tools",
+  "description": "tools.xenastudios.co: tools for running a Minecraft server",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "packageManager": "pnpm@12.16.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xena-studios/tools.git"
+  },
+  "homepage": "https://tools.xenastudios.co",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm -r build",
+    "test": "vitest run",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "brand:sync": "node scripts/sync-brand.ts",
+    "deploy": "pnpm --filter web deploy"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.9",
+    "@types/node": "^24.19.2",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.2"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
