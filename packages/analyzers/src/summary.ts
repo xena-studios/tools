@@ -26,7 +26,7 @@ export interface Summary {
 }
 
 const SOFTWARE_LINE =
-  /This server is running (\S+) version (\S+) (?:\(MC: ([\w.-]+)\) )?(?:\([^)]*\) )?\(Implementing API version ([^)\s]+)\)/;
+  /^This server is running (\S+) version (\S+) (?:\(MC: ([\w.-]+)\) )?(?:\([^)]*\) )?\(Implementing API version ([^)\s]+)\)/;
 
 /** Bukkit forks report themselves by name; the CraftBukkit base name means Spigot. */
 const SOFTWARE_NAMES: Record<string, string> = {
