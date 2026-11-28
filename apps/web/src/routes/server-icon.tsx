@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { PhoneBar, useOffscreen } from "../components/Copy";
-import { Toggle } from "../components/FormatPicker";
+import { type FormatOption, FormatPicker } from "../components/FormatPicker";
 import { ImageDrop, type LoadedImage, useImageFile } from "../components/ImageDrop";
 import { ServerList } from "../components/ServerList";
 import { ToolPage, toolHead } from "../components/ToolPage";
@@ -28,6 +28,11 @@ export const Route = createFileRoute("/server-icon")({
 const tool = toolBySlug("server-icon");
 
 type Scaling = "smooth" | "pixel";
+
+const SCALINGS: FormatOption<Scaling>[] = [
+  { id: "smooth", label: "Smooth", usedBy: "Logos and pictures" },
+  { id: "pixel", label: "Pixel art", usedBy: "Art drawn at a small size" },
+];
 
 interface State {
   scaling: Scaling;
@@ -173,29 +178,20 @@ function ServerIconTool() {
             </p>
           )}
 
-          <fieldset>
-            <legend className="label mb-2">Scaling</legend>
-            <div className="flex flex-wrap gap-2">
-              <Toggle
-                checked={state.scaling === "smooth"}
-                onChange={() => update({ scaling: "smooth" })}
-              >
-                Smooth
-              </Toggle>
-              <Toggle
-                checked={state.scaling === "pixel"}
-                onChange={() => update({ scaling: "pixel" })}
-              >
-                Pixel art
-              </Toggle>
-            </div>
+          <div>
+            <FormatPicker
+              label="Scaling"
+              options={SCALINGS}
+              value={state.scaling}
+              onChange={(scaling) => update({ scaling })}
+            />
             <p className="mt-2 text-xs text-muted">
               {state.scaling === "smooth"
                 ? "For logos and pictures: scaled down in halves, so edges stay clean."
                 : "For pixel art: every icon pixel takes the nearest image pixel, so nothing blurs."}{" "}
               The link saves this choice; images can't go in a link, so it doesn't hold the picture.
             </p>
-          </fieldset>
+          </div>
         </div>
 
         <div className="flex flex-col gap-4 self-start lg:sticky lg:top-24">
@@ -205,7 +201,7 @@ function ServerIconTool() {
             </PhoneBar>
             <div className="mb-4 flex items-center justify-between gap-3">
               <div className="min-w-0">
-                <h3 className="text-sm font-semibold tracking-normal">server-icon.png</h3>
+                <h2 className="text-sm font-semibold tracking-normal">server-icon.png</h2>
                 <p className="text-xs text-muted">64×64 PNG, next to server.properties</p>
               </div>
               {download}
@@ -379,7 +375,7 @@ function Guide() {
           players see the new icon the next time their server list refreshes.
         </li>
       </ul>
-      <h2>Getting a good result</h2>
+      <h2>Good to know</h2>
       <ul>
         <li>
           Pick <strong>Smooth</strong> for logos and pictures, and <strong>Pixel art</strong> for

@@ -218,9 +218,7 @@ function LogAnalyzerTool() {
               >
                 Analyse
               </button>
-              <label
-                className={`button compact choice ${busy ? "pointer-events-none opacity-45" : ""}`}
-              >
+              <label className={`button choice ${busy ? "pointer-events-none opacity-45" : ""}`}>
                 Choose a file
                 <input
                   type="file"
@@ -742,7 +740,8 @@ function Guide() {
           Starting the server again? The{" "}
           <Link to="/flags" className="more">
             Startup Flags
-          </Link>
+          </Link>{" "}
+          tool writes its start script.
         </li>
       </ul>
     </>

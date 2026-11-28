@@ -11,15 +11,10 @@ import {
 } from "@xena-tools/mc-text";
 import { useMemo } from "react";
 import { Output } from "../components/Copy";
-import {
-  type FormatOption,
-  FormatPicker,
-  isOutputFormat,
-  TEXT_FORMATS,
-  Toggle,
-} from "../components/FormatPicker";
+import { type FormatOption, FormatPicker, Toggle } from "../components/FormatPicker";
 import { McText } from "../components/McText";
 import { ToolPage, toolHead } from "../components/ToolPage";
+import { isOutputFormat, TEXT_FORMATS } from "../lib/text-formats";
 import { flag, useUrlState } from "../lib/url-state";
 import { toolBySlug } from "../tools";
 
@@ -49,6 +44,15 @@ const PRESETS: { name: string; colors: string[] }[] = [
     name: "Rainbow",
     colors: ["#FF5555", "#FFAA00", "#FFFF55", "#55FF55", "#55FFFF", "#5555FF", "#FF55FF"],
   },
+];
+
+const BLENDS: FormatOption<Interpolation>[] = [
+  {
+    id: "oklab",
+    label: "Even (OKLab)",
+    usedBy: "Keeps the middle of the gradient from going muddy",
+  },
+  { id: "rgb", label: "Linear RGB", usedBy: "Matches MiniMessage's own <gradient> tag" },
 ];
 
 const DECORATIONS: { id: Decoration; label: string; key: string }[] = [
@@ -262,26 +266,16 @@ function GradientTool() {
             </div>
           </fieldset>
 
-          <fieldset>
-            <legend className="label mb-2">Blending</legend>
-            <div className="flex flex-wrap gap-2">
-              <Toggle
-                checked={state.interpolation === "oklab"}
-                onChange={() => update({ interpolation: "oklab" })}
-              >
-                Even (OKLab)
-              </Toggle>
-              <Toggle
-                checked={state.interpolation === "rgb"}
-                onChange={() => update({ interpolation: "rgb" })}
-              >
-                Linear RGB
-              </Toggle>
-              <Toggle checked={state.skipSpaces} onChange={(v) => update({ skipSpaces: v })}>
-                Skip spaces
-              </Toggle>
-            </div>
-          </fieldset>
+          <FormatPicker
+            label="Blending"
+            options={BLENDS}
+            value={state.interpolation}
+            onChange={(interpolation) => update({ interpolation })}
+          >
+            <Toggle checked={state.skipSpaces} onChange={(v) => update({ skipSpaces: v })}>
+              Skip spaces
+            </Toggle>
+          </FormatPicker>
         </div>
 
         <div className="flex flex-col gap-4 self-start lg:sticky lg:top-24">
@@ -308,7 +302,7 @@ function GradientTool() {
 function Guide() {
   return (
     <>
-      <h2>Which format do I need?</h2>
+      <h2>Where it goes</h2>
       <ul>
         <li>
           <strong>MiniMessage</strong> for Paper, Velocity and plugins that say they support it
@@ -332,7 +326,7 @@ function Guide() {
           Servers before 1.21.5 need the older JSON.
         </li>
       </ul>
-      <h2>Tips</h2>
+      <h2>Good to know</h2>
       <ul>
         <li>
           Use two or three colours that are close in brightness: the text stays readable on any

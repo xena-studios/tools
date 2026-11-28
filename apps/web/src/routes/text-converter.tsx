@@ -11,9 +11,10 @@ import {
 } from "@xena-tools/mc-text";
 import { useMemo } from "react";
 import { Output } from "../components/Copy";
-import { FormatPicker, isOutputFormat, TEXT_FORMATS } from "../components/FormatPicker";
+import { FormatPicker } from "../components/FormatPicker";
 import { McText } from "../components/McText";
 import { ToolPage, toolHead } from "../components/ToolPage";
+import { isOutputFormat, TEXT_FORMATS } from "../lib/text-formats";
 import { useUrlState } from "../lib/url-state";
 import { toolBySlug } from "../tools";
 
@@ -127,12 +128,7 @@ function ConverterTool() {
         </div>
 
         <div className="flex flex-col gap-4 self-start lg:sticky lg:top-24">
-          <FormatPicker
-            label="To"
-            options={TEXT_FORMATS}
-            value={state.to}
-            onChange={(to) => update({ to })}
-          />
+          <FormatPicker options={TEXT_FORMATS} value={state.to} onChange={(to) => update({ to })} />
           <Output
             label={info?.label ?? "Output"}
             hint={info?.usedBy}
