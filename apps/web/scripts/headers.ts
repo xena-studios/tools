@@ -33,6 +33,10 @@ const CONNECT: Record<string, string[]> = {
   "/status": ["https://api.mcstatus.io"],
 };
 
+// Cloudflare Web Analytics on every page: its beacon script, and where it reports.
+const ANALYTICS_SCRIPT = "https://static.cloudflareinsights.com";
+const ANALYTICS_REPORT = "https://cloudflareinsights.com";
+
 const COMMON = [
   "  Cross-Origin-Opener-Policy: same-origin",
   "  Referrer-Policy: strict-origin-when-cross-origin",
@@ -59,11 +63,13 @@ for (const file of pages(CLIENT)) {
   }
   let route = `/${path.relative(CLIENT, file).replace(/\\/g, "/")}`;
   route = route.replace(/index\.html$/, "").replace(/\.html$/, "");
-  const connect = ["'self'", ...(CONNECT[route.replace(/\/$/, "")] ?? [])].join(" ");
+  const connect = ["'self'", ANALYTICS_REPORT, ...(CONNECT[route.replace(/\/$/, "")] ?? [])].join(
+    " ",
+  );
   const csp = [
     ...BASE,
     `connect-src ${connect}`,
-    `script-src 'self' ${[...hashes].join(" ")}`.trim(),
+    `script-src 'self' ${ANALYTICS_SCRIPT} ${[...hashes].join(" ")}`.trim(),
   ].join("; ");
   // A page is reachable with and without its trailing slash.
   const routes =

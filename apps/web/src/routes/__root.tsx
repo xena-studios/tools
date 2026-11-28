@@ -23,6 +23,16 @@ export const Route = createRootRoute({
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
+    // Cloudflare Web Analytics: counts visits with no cookies and no personal
+    // data. The token is public (it's in every page that uses the beacon); it's
+    // the xenastudios.co site, which reports each subdomain by host.
+    scripts: [
+      {
+        src: "https://static.cloudflareinsights.com/beacon.min.js",
+        defer: true,
+        "data-cf-beacon": '{"token": "1b6818b82f294d5aa6c76d35768d8098"}',
+      },
+    ],
   }),
   shellComponent: RootDocument,
   component: () => <Outlet />,

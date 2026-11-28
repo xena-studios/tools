@@ -74,8 +74,8 @@ export function Footer() {
           <a href={`${SITE.repo}/blob/main/LICENSE`} className="underline">
             AGPL-3.0
           </a>
-          . Not an official Minecraft product. Not approved by or associated with Mojang or
-          Microsoft.
+          . Visits are counted with Cloudflare Web Analytics, which uses no cookies. Not an official
+          Minecraft product. Not approved by or associated with Mojang or Microsoft.
         </p>
         <nav aria-label="Footer">
           <ul className="mt-1 flex flex-wrap gap-x-7 gap-y-1">
