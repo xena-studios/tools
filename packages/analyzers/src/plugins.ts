@@ -99,7 +99,10 @@ const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 
 /** A plugin's name from a jar file name: "EssentialsX-2.20.1.jar" -> "EssentialsX". */
 export function nameFromJar(jar: string): string {
-  return jar.replace(/\.jar$/i, "").replace(/[-_ ]?v?\d[\w.+-]*$/i, "") || jar;
+  const base = jar.replace(/\.jar$/i, "");
+  // Cut at the first separator followed by a version number.
+  const at = base.search(/[-_ ]v?\d/i);
+  return (at > 0 ? base.slice(0, at) : base) || jar;
 }
 
 export class Attributor {

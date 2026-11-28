@@ -26,7 +26,7 @@ export interface Summary {
 }
 
 const SOFTWARE_LINE =
-  /This server is running (\S+) version (\S+)(?: \(MC: ([\w.-]+)\))?.*?\(Implementing API version ([\w.-]+?)(?:-R\d.*)?\)/;
+  /This server is running (\S+) version (\S+) (?:\(MC: ([\w.-]+)\) )?(?:\([^)]*\) )?\(Implementing API version ([^)\s]+)\)/;
 
 /** Bukkit forks report themselves by name; the CraftBukkit base name means Spigot. */
 const SOFTWARE_NAMES: Record<string, string> = {
@@ -59,7 +59,7 @@ export function summarise(log: ParsedLog): Summary {
       const name = m[1] ?? "";
       s.software = SOFTWARE_NAMES[name.toLowerCase()] ?? name;
       s.softwareVersion = m[2]?.replace(/^git-[A-Za-z]+-/, "");
-      s.minecraft ??= m[3] ?? m[4];
+      s.minecraft ??= m[3] ?? m[4]?.replace(/-R\d[^-]*(?:-SNAPSHOT)?$/, "");
     } else if ((m = /^\[bootstrap\] Loading (\w+) (\S+) \(.*?\) for Minecraft (\S+)/.exec(msg))) {
       // Paper's bootstrap: "Loading Paper 1.21.4-232-main@abc1234 (2025-…) for Minecraft 1.21.4"
       s.software = SOFTWARE_NAMES[(m[1] ?? "").toLowerCase()] ?? m[1];
@@ -95,8 +95,10 @@ export function summarise(log: ParsedLog): Summary {
     }
 
     // Paper's bootstrap: "Running Java 21 (OpenJDK 64-Bit Server VM 21.0.5+11-LTS; …) on Linux …"
-    if ((m = /Running Java (\d+) \((?:[^;)]*?VM )?(\d[\w.+-]*)/.exec(msg))) {
-      s.java = m[2]?.replace(/\+.*$/, "") ?? m[1];
+    if ((m = /Running Java (\d+) \(([^;)]*)/.exec(msg))) {
+      // The VM's name, then its version: the last word.
+      const version = m[2]?.trim().split(" ").at(-1) ?? "";
+      s.java = /^\d/.test(version) ? version.split("+")[0] : m[1];
     } else if ((m = /starting: java version (\S+)/.exec(msg))) {
       // Forge's ModLauncher: "ModLauncher 10.0.9 starting: java version 17.0.8 by Eclipse Adoptium"
       s.java = m[1];
@@ -111,8 +113,13 @@ export function summarise(log: ParsedLog): Summary {
       add(m[1] ?? "", m[2]);
     } else if ((m = /^\[PluginInitializerManager\] (?:Bukkit|Paper) plugins \(\d+\):/.exec(msg))) {
       // Paper: "Bukkit plugins (9):" then " - LuckPerms (5.4.145), Vault (1.7.3-b131), …"
-      for (const p of e.rest.join(" ").matchAll(/(?:^|,|-)\s*([\w.-]+) \(([^)]+)\)/g))
-        add(p[1] ?? "", p[2]);
+      for (const item of e.rest
+        .join(",")
+        .replace(/^\s*-\s*/, "")
+        .split(",")) {
+        const p = /^\s*([\w.-]+) \(([^)]+)\)\s*$/.exec(item);
+        if (p?.[1]) add(p[1], p[2]);
+      }
     } else if ((m = /^Loaded plugin (\S+) (\S+)(?: by |$)/.exec(msg))) {
       // Velocity: "Loaded plugin luckperms 5.4.141 by Luck"
       add(m[1] ?? "", m[2]);

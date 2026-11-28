@@ -102,7 +102,7 @@ export const RULES: readonly Rule[] = [
       const need = javaForClassVersion(Number.parseFloat(String(g.classVersion)));
       const have = javaForClassVersion(Number.parseFloat(String(g.maxVersion)));
       const plugin =
-        isServerClass(cls) || /paperclip|bundler|Main$/i.test(cls)
+        isServerClass(cls) || /paperclip|bundler/i.test(cls) || cls.endsWith(".Main")
           ? undefined
           : ctx.attributor.fromClass(cls);
       const entry = ctx.entryAt(line.n);
@@ -999,7 +999,7 @@ export const RULES: readonly Rule[] = [
       if (!c || !m) return [];
       const lines = linesMatching(
         ctx,
-        /^Description: |Entity Type: |Block type: |Entity's Exact location: |Block location: /,
+        /^(?:Description|\t(?:Entity Type|Block type|Entity's Exact location|Block location)): /,
       );
       const value = (re: RegExp) => ctx.log.lines.map((l) => re.exec(l.text)?.[1]).find(Boolean);
       const type =
