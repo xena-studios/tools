@@ -18,3 +18,4 @@ coverage/
 
 # Impeccable review captures: regenerated on every review.
 .impeccable/review/
+!packages/analyzers/fixtures/*.log

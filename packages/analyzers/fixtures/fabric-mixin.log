@@ -1,0 +1,10 @@
+[18:42:05] [main/INFO]: Loading Minecraft 1.21.1 with Fabric Loader 0.16.10
+[18:42:06] [main/INFO]: Loading 7 mods:
+	- fabric-api 0.115.0+1.21.1
+	- fabricloader 0.16.10
+	- ferritecore 7.0.2-hotfix
+	- java 21
+	- lithium 0.15.1+mc1.21.1
+	- lithiumplus 0.3.0
+	- minecraft 1.21.1
+[18:42:09] [main/ERROR]: Mixin apply for mod lithiumplus failed lithiumplus.mixins.json:world.ServerWorldMixin from mod lithiumplus -> net.minecraft.class_3218: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException Critical injection failure: @Inject annotation on tickChunk could not find any targets matching 'method_18203' in net.minecraft.class_3218. No refMap loaded. [INJECT Applicator Phase -> lithiumplus.mixins.json:world.ServerWorldMixin from mod lithiumplus -> Apply Injections ->  -> Inject -> lithiumplus.mixins.json:world.ServerWorldMixin from mod lithiumplus->@Inject::tickChunk(Lnet/minecraft/class_2818;ILorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V]

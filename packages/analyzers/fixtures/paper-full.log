@@ -1,0 +1,146 @@
+[14:02:09] [ServerMain/INFO]: [bootstrap] Running Java 21 (OpenJDK 64-Bit Server VM 21.0.5+11-LTS; Eclipse Adoptium Temurin-21.0.5+11) on Linux 6.8.0-49-generic (amd64)
+[14:02:09] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.4-212-ver/1.21.4@4f1a2b3 (2025-02-20T09:14:33Z) for Minecraft 1.21.4
+[14:02:10] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[14:02:11] [ServerMain/INFO]: [PluginInitializerManager] Initialized 9 plugins
+[14:02:11] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (9):
+ - EssentialsX (2.20.1), HoloBoard (2.3.1), LuckPerms (5.4.145), MineRewards (1.4.0), OldWarps (1.2), ShopPlus (1.98), Skyward (0.9.2), Vault (1.7.3-b131), WorldEdit (7.3.9)
+[14:02:14] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[14:02:16] [ServerMain/INFO]: Loaded 1370 recipes
+[14:02:16] [ServerMain/INFO]: Loaded 1481 advancements
+[14:02:17] [Server thread/INFO]: Starting minecraft server version 1.21.4
+[14:02:17] [Server thread/INFO]: Loading properties
+[14:02:17] [Server thread/INFO]: Default game type: SURVIVAL
+[14:02:17] [Server thread/INFO]: Generating keypair
+[14:02:17] [Server thread/INFO]: Starting Minecraft server on *:25565
+[14:02:17] [Server thread/INFO]: Using epoll channel type
+[14:02:17] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[14:02:17] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[14:02:17] [Server thread/WARN]: Whilst this makes it possible to use Velocity, unless access to your server is properly restricted, it also opens up the ability for hackers to connect with any username they choose.
+[14:02:17] [Server thread/WARN]: Please see https://docs.papermc.io/velocity/security for further information.
+[14:02:17] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[14:02:18] [Server thread/INFO]: [LuckPerms] Loading server plugin LuckPerms v5.4.145
+[14:02:18] [Server thread/INFO]:         __    
+[14:02:18] [Server thread/INFO]:   |    |__)   LuckPerms v5.4.145
+[14:02:18] [Server thread/INFO]:   |___ |      Running on Bukkit - Paper
+[14:02:18] [Server thread/INFO]: [Vault] Loading server plugin Vault v1.7.3-b131
+[14:02:18] [Server thread/INFO]: [WorldEdit] Loading server plugin WorldEdit v7.3.9+6959-7adf70b
+[14:02:19] [Server thread/INFO]: [EssentialsX] Loading server plugin EssentialsX v2.20.1
+[14:02:19] [Server thread/INFO]: [HoloBoard] Loading server plugin HoloBoard v2.3.1
+[14:02:19] [Server thread/INFO]: [MineRewards] Loading server plugin MineRewards v1.4.0
+[14:02:19] [Server thread/INFO]: [OldWarps] Loading server plugin OldWarps v1.2
+[14:02:19] [Server thread/ERROR]: Could not load 'plugins/ShopPlus-1.98.jar' in 'plugins'
+org.bukkit.plugin.UnknownDependencyException: Unknown/missing dependency plugins: [PlaceholderAPI, Citizens]. Please download and install these plugins to run 'ShopPlus'.
+	at io.papermc.paper.plugin.entrypoint.strategy.modern.ModernPluginLoadingStrategy.loadProviders(ModernPluginLoadingStrategy.java:84) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at io.papermc.paper.plugin.storage.SimpleProviderStorage.enter(SimpleProviderStorage.java:39) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at io.papermc.paper.plugin.entrypoint.LaunchEntryPointHandler.enter(LaunchEntryPointHandler.java:39) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at org.bukkit.craftbukkit.CraftServer.loadPlugins(CraftServer.java:579) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:304) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1215) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+[14:02:19] [Server thread/WARN]: Legacy plugin OldWarps v1.2 does not specify an api-version.
+[14:02:20] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[14:02:20] [Server thread/INFO]: Preparing level "world"
+[14:02:20] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[14:02:21] [Server thread/INFO]: Preparing spawn area: 0%
+[14:02:22] [Server thread/INFO]: Preparing spawn area: 52%
+[14:02:23] [Server thread/INFO]: Time elapsed: 2843 ms
+[14:02:23] [Server thread/INFO]: Done preparing level "world" (3.198s)
+[14:02:23] [Server thread/INFO]: [LuckPerms] Enabling LuckPerms v5.4.145
+[14:02:24] [Server thread/INFO]: [Vault] Enabling Vault v1.7.3-b131
+[14:02:24] [Server thread/INFO]: [WorldEdit] Enabling WorldEdit v7.3.9+6959-7adf70b
+[14:02:24] [Server thread/WARN]: Initializing Legacy Material Support. Unless you have legacy plugins and/or data this is a bug!
+[14:02:25] [Server thread/INFO]: [OldWarps] Enabling OldWarps v1.2
+[14:02:25] [Server thread/INFO]: [EssentialsX] Enabling EssentialsX v2.20.1
+[14:02:25] [Server thread/INFO]: [HoloBoard] Enabling HoloBoard v2.3.1
+[14:02:25] [Server thread/ERROR]: Error occurred while enabling HoloBoard v2.3.1 (Is it up to date?)
+java.lang.NullPointerException: Cannot invoke "org.bukkit.configuration.ConfigurationSection.getKeys(boolean)" because "section" is null
+	at HoloBoard-2.3.1.jar/dev.example.holoboard.board.BoardManager.load(BoardManager.java:58) ~[HoloBoard-2.3.1.jar:?]
+	at HoloBoard-2.3.1.jar/dev.example.holoboard.HoloBoardPlugin.onEnable(HoloBoardPlugin.java:41) ~[HoloBoard-2.3.1.jar:?]
+	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:280) ~[paper-api-1.21.4-R0.1-SNAPSHOT.jar:?]
+	at io.papermc.paper.plugin.manager.PaperPluginInstanceManager.enablePlugin(PaperPluginInstanceManager.java:202) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.enablePlugin(PaperPluginManagerImpl.java:109) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugin(CraftServer.java:659) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugins(CraftServer.java:608) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at net.minecraft.server.MinecraftServer.loadWorld0(MinecraftServer.java:747) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+[14:02:25] [Server thread/INFO]: [HoloBoard] Disabling HoloBoard v2.3.1
+[14:02:25] [Server thread/INFO]: [MineRewards] Enabling MineRewards v1.4.0
+[14:02:25] [Server thread/INFO]: [MineRewards] Connecting to MySQL at db.internal:3306
+[14:02:26] [Server thread/INFO]: Running delayed init tasks
+[14:02:26] [Server thread/INFO]: Done (11.204s)! For help, type "help"
+[14:02:26] [Server thread/INFO]: *** Currently you are 14 builds behind ***
+[14:02:26] [Server thread/INFO]: *** It is highly recommended to download the latest build from https://papermc.io/downloads/paper ***
+[14:02:27] [Server thread/INFO]: Nag author(s): '[Skyward Team]' of 'Skyward v0.9.2' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
+[14:02:27] [Server thread/INFO]: [Skyward] [STDOUT] Loaded 12 islands
+[14:04:51] [User Authenticator #0/INFO]: UUID of player Steve is 4b9f6b1e-3c2a-4a77-9e44-0d0c8f6c1a10
+[14:04:51] [Server thread/INFO]: Steve joined the game
+[14:04:51] [Server thread/INFO]: Steve[/10.0.0.4:51234] logged in with entity id 213 at ([world]12.5, 71.0, -40.5)
+[14:04:52] [Server thread/ERROR]: Could not pass event PlayerJoinEvent to MineRewards v1.4.0
+java.lang.IllegalStateException: Reward table 'daily' not loaded
+	at MineRewards-1.4.0.jar/dev.example.minerewards.RewardService.grant(RewardService.java:112) ~[MineRewards-1.4.0.jar:?]
+	at MineRewards-1.4.0.jar/dev.example.minerewards.listener.JoinListener.onJoin(JoinListener.java:27) ~[MineRewards-1.4.0.jar:?]
+	at com.destroystokyo.paper.event.executor.MethodHandleEventExecutor.execute(MethodHandleEventExecutor.java:40) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at org.bukkit.plugin.RegisteredListener.callEvent(RegisteredListener.java:70) ~[paper-api-1.21.4-R0.1-SNAPSHOT.jar:?]
+	at io.papermc.paper.plugin.manager.PaperEventManager.callEvent(PaperEventManager.java:54) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at net.minecraft.server.players.PlayerList.placeNewPlayer(PlayerList.java:357) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+[14:05:30] [User Authenticator #1/INFO]: Disconnecting Alex (/203.0.113.9:40112): This server requires you to connect with Velocity.
+[14:06:02] [Craft Scheduler Thread - 7 - MineRewards/WARN]: [MineRewards] Plugin MineRewards v1.4.0 generated an exception while executing task 812
+java.sql.SQLTransientConnectionException: MineRewards-Pool - Connection is not available, request timed out after 30000ms (total=10, active=10, idle=0, waiting=0)
+	at MineRewards-1.4.0.jar/dev.example.minerewards.libs.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:686) ~[MineRewards-1.4.0.jar:?]
+	at MineRewards-1.4.0.jar/dev.example.minerewards.db.RewardStore.save(RewardStore.java:64) ~[MineRewards-1.4.0.jar:?]
+	at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at org.bukkit.craftbukkit.scheduler.CraftAsyncTask.run(CraftAsyncTask.java:57) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+[14:06:40] [Craft Scheduler Thread - 7 - MineRewards/WARN]: [MineRewards] Plugin MineRewards v1.4.0 generated an exception while executing task 813
+java.sql.SQLTransientConnectionException: MineRewards-Pool - Connection is not available, request timed out after 30000ms (total=10, active=10, idle=0, waiting=0)
+	at MineRewards-1.4.0.jar/dev.example.minerewards.libs.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:686) ~[MineRewards-1.4.0.jar:?]
+	at MineRewards-1.4.0.jar/dev.example.minerewards.db.RewardStore.save(RewardStore.java:64) ~[MineRewards-1.4.0.jar:?]
+	at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at org.bukkit.craftbukkit.scheduler.CraftAsyncTask.run(CraftAsyncTask.java:57) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+[14:07:15] [Craft Scheduler Thread - 7 - MineRewards/WARN]: [MineRewards] Plugin MineRewards v1.4.0 generated an exception while executing task 814
+java.sql.SQLTransientConnectionException: MineRewards-Pool - Connection is not available, request timed out after 30000ms (total=10, active=10, idle=0, waiting=0)
+	at MineRewards-1.4.0.jar/dev.example.minerewards.libs.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:686) ~[MineRewards-1.4.0.jar:?]
+	at MineRewards-1.4.0.jar/dev.example.minerewards.db.RewardStore.save(RewardStore.java:64) ~[MineRewards-1.4.0.jar:?]
+	at org.bukkit.craftbukkit.scheduler.CraftTask.run(CraftTask.java:78) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at org.bukkit.craftbukkit.scheduler.CraftAsyncTask.run(CraftAsyncTask.java:57) ~[paper-1.21.4.jar:1.21.4-212-4f1a2b3]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
+[14:09:12] [Server thread/WARN]: Steve moved too quickly! 18.3,0.0,7.9
+[14:09:13] [Server thread/WARN]: Steve moved too quickly! 21.0,-0.4,6.2
+[14:11:40] [Server thread/INFO]: <Steve> anyone got spare iron?
+[14:20:31] [Watchdog Thread/ERROR]: ------------------------------
+[14:20:31] [Watchdog Thread/ERROR]: The server has stopped responding! This is (probably) not a Paper bug.
+[14:20:31] [Watchdog Thread/ERROR]: If you see a plugin in the Server thread dump below, then please report it to that author
+[14:20:31] [Watchdog Thread/ERROR]: Paper version: 1.21.4-212-ver/1.21.4@4f1a2b3 (2025-02-20T09:14:33Z) (Implementing API version 1.21.4-R0.1-SNAPSHOT)
+[14:20:31] [Watchdog Thread/ERROR]: ------------------------------
+[14:20:31] [Watchdog Thread/ERROR]: Server thread dump (Look for plugins here before reporting to Paper!):
+[14:20:31] [Watchdog Thread/ERROR]: ------------------------------
+[14:20:31] [Watchdog Thread/ERROR]: Current Thread: Server thread
+[14:20:31] [Watchdog Thread/ERROR]: 	PID: 41 | Suspended: false | Native: true | State: RUNNABLE
+[14:20:31] [Watchdog Thread/ERROR]: 	Stack:
+[14:20:31] [Watchdog Thread/ERROR]: 		java.base@21.0.5/sun.nio.ch.Net.poll(Native Method)
+[14:20:31] [Watchdog Thread/ERROR]: 		java.base@21.0.5/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:191)
+[14:20:31] [Watchdog Thread/ERROR]: 		java.base@21.0.5/java.net.Socket$SocketInputStream.read(Socket.java:1099)
+[14:20:31] [Watchdog Thread/ERROR]: 		dev.example.minerewards.libs.mysql.cj.protocol.ReadAheadInputStream.fill(ReadAheadInputStream.java:107)
+[14:20:31] [Watchdog Thread/ERROR]: 		dev.example.minerewards.libs.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1006)
+[14:20:31] [Watchdog Thread/ERROR]: 		dev.example.minerewards.db.RewardStore.load(RewardStore.java:88)
+[14:20:31] [Watchdog Thread/ERROR]: 		dev.example.minerewards.listener.JoinListener.onJoin(JoinListener.java:22)
+[14:20:31] [Watchdog Thread/ERROR]: 		com.destroystokyo.paper.event.executor.MethodHandleEventExecutor.execute(MethodHandleEventExecutor.java:40)
+[14:20:31] [Watchdog Thread/ERROR]: 		org.bukkit.plugin.RegisteredListener.callEvent(RegisteredListener.java:70)
+[14:20:31] [Watchdog Thread/ERROR]: 		io.papermc.paper.plugin.manager.PaperEventManager.callEvent(PaperEventManager.java:54)
+[14:20:31] [Watchdog Thread/ERROR]: 		net.minecraft.server.players.PlayerList.placeNewPlayer(PlayerList.java:357)
+[14:20:31] [Watchdog Thread/ERROR]: 		net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1781)
+[14:20:31] [Watchdog Thread/ERROR]: 		net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1290)
+[14:20:31] [Watchdog Thread/ERROR]: 		java.base@21.0.5/java.lang.Thread.runWith(Thread.java:1596)
+[14:20:31] [Watchdog Thread/ERROR]: 		java.base@21.0.5/java.lang.Thread.run(Thread.java:1583)
+[14:20:31] [Watchdog Thread/ERROR]: ------------------------------
+[14:20:31] [Watchdog Thread/ERROR]: Entire Thread Dump:
+[14:20:31] [Watchdog Thread/ERROR]: ------------------------------
+[14:20:31] [Watchdog Thread/ERROR]: Current Thread: Craft Scheduler Thread - 7 - MineRewards
+[14:20:31] [Watchdog Thread/ERROR]: 	PID: 88 | Suspended: false | Native: false | State: TIMED_WAITING
+[14:20:31] [Watchdog Thread/ERROR]: 	Stack:
+[14:20:31] [Watchdog Thread/ERROR]: 		java.base@21.0.5/jdk.internal.misc.Unsafe.park(Native Method)
+[14:20:31] [Watchdog Thread/ERROR]: 		java.base@21.0.5/java.lang.Thread.run(Thread.java:1583)
+[14:20:31] [Watchdog Thread/ERROR]: ------------------------------
+[14:20:32] [Server thread/INFO]: Stopping server
