@@ -790,3 +790,11 @@ svg.horizon {
     transition-duration: 1ms !important;
   }
 }
+
+/* While a tool's copy bar floats over the bottom of a phone screen, the footer
+   gets room below its last line so the bar never covers it. */
+@media (max-width: 63.999rem) {
+  body:has([data-copy-bar]) footer {
+    padding-bottom: 4rem;
+  }
+}

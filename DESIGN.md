@@ -221,7 +221,7 @@ One centred column, `--max` 76rem wide plus fluid page gutters (`--page`, `clamp
 - **Guide:** under the tool, a hairline, then "How to use it" prose at 64ch: two to six h2 sections in plain question or topic words ("Where it goes", "Good to know"), each a short list.
 - **404:** the `// 404` kicker, "No tool here", one line pointing to ⌘K, the "Find a tool" primary pill and an "All tools" pill, and the closing horizon. Titled "Page not found" and `noindex`.
 - **Closing horizon:** every tool page ends with a static horizon (`clamp(5rem, 22vw, 17rem)` tall) below the work, so it never pushes the output down.
-- **Footer:** a hairline, the XENA mark linking to xenastudios.co, the copyright, the AGPL-3.0 licence, Mojang's required disclaimer, and the footer links.
+- **Footer:** xenastudios.co's footer. A line on what the site is (with the AGPL-3.0 licence and the analytics note), then link columns: the live tools under Text, Server and Lookup, read from `tools.ts`, and a Studio column. Below a hairline is the row every Xena site ends with: the XENA mark linking to xenastudios.co, the copyright, and Mojang's required disclaimer. On phones it leaves room for a tool's copy bar.
 
 ### Named Rules
 

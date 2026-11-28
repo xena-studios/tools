@@ -76,7 +76,10 @@ export function PhoneBar({
 }) {
   if (!show) return null;
   return (
-    <div className="fixed inset-x-0 bottom-0 z-10 border-t border-rule bg-bg/90 backdrop-blur-md lg:hidden">
+    <div
+      data-copy-bar
+      className="fixed inset-x-0 bottom-0 z-10 border-t border-rule bg-bg/90 backdrop-blur-md lg:hidden"
+    >
       <div className="wrap flex min-h-16 items-center justify-between gap-4">
         <span className="min-w-0 truncate text-sm">
           <span className="text-muted">Output: </span>

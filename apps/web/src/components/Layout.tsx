@@ -1,9 +1,10 @@
-// The studio's shell, as on brand.xenastudios.co: XENA STUDIOS and the site's
-// name in the header, and the XENA mark, the licence and the links in the footer.
+// The studio's shell: XENA STUDIOS and the site's name in the header, as on
+// brand.xenastudios.co, and xenastudios.co's footer.
 
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { SITE } from "../tools";
+import type { FileRouteTypes } from "../routeTree.gen";
+import { type Category, LIVE_TOOLS, SITE } from "../tools";
 import { External, Logo } from "./Brand";
 import { useOpenPalette } from "./CommandPalette";
 
@@ -54,53 +55,94 @@ export function Header() {
   );
 }
 
+/** Footer columns: the tools by kind, then the studio, as xenastudios.co's columns are. */
+const FOOT_COLUMNS: { title: string; categories: Category[] }[] = [
+  { title: "Text", categories: ["Text"] },
+  { title: "Server", categories: ["Server", "Branding"] },
+  { title: "Lookup", categories: ["Lookup"] },
+];
+
+const footLink = "text-muted no-underline transition-colors duration-150 hover:text-text";
+
+/**
+ * The studio's footer, as on xenastudios.co: a line on what this is, the link
+ * columns, then the row every Xena site ends with (the XENA mark, the copyright
+ * and its one note).
+ */
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-auto border-t border-rule pt-10 pb-12 text-sm text-muted">
-      <div className="wrap grid gap-4">
-        <p className="flex flex-wrap items-center gap-x-5 gap-y-2">
+    <footer className="mt-auto border-t border-rule pt-12">
+      <div className="wrap grid items-start gap-8 pb-12 md:grid-cols-[minmax(0,1fr)_auto]">
+        <p className="max-w-[34ch] text-sm text-muted">
+          Free web tools for running a Minecraft server. Open source under the{" "}
           <a
-            href="https://xenastudios.co"
-            className="inline-flex text-text"
-            aria-label="Xena Studios"
+            href={`${SITE.repo}/blob/main/LICENSE`}
+            className="text-muted underline hover:text-text"
           >
-            <Logo name="xena" className="h-[0.9rem] w-auto" />
-          </a>
-          <span className="label font-medium">© {year} Xena Studios</span>
-        </p>
-        <p className="max-w-[72ch] text-sm">
-          Free and open source under the{" "}
-          <a href={`${SITE.repo}/blob/main/LICENSE`} className="underline">
             AGPL-3.0
           </a>
-          . Visits are counted with Cloudflare Web Analytics, which uses no cookies. Not an official
-          Minecraft product. Not approved by or associated with Mojang or Microsoft.
+          ; visits are counted with Cloudflare Web Analytics, which uses no cookies.
         </p>
-        <nav aria-label="Footer">
-          <ul className="mt-1 flex flex-wrap gap-x-7 gap-y-1">
-            <li>
-              <Link to="/" className="no-underline hover:text-text">
-                All tools
-              </Link>
-            </li>
-            <li>
-              <a href={SITE.repo} className="no-underline hover:text-text">
-                <External>Source</External>
-              </a>
-            </li>
-            <li>
-              <a href={`${SITE.repo}/issues/new/choose`} className="no-underline hover:text-text">
-                <External>Report a problem</External>
-              </a>
-            </li>
-            <li>
-              <a href="https://xenastudios.co" className="no-underline hover:text-text">
-                <External>xenastudios.co</External>
-              </a>
-            </li>
-          </ul>
+        <nav
+          aria-label="Footer"
+          className="grid grid-cols-2 gap-8 sm:grid-cols-4 md:grid-cols-[repeat(4,minmax(8rem,auto))]"
+        >
+          {FOOT_COLUMNS.map((col) => (
+            <div key={col.title}>
+              <h2 className="label mb-3 font-normal tracking-[0.14em]">{col.title}</h2>
+              <ul className="grid gap-2 text-sm">
+                {LIVE_TOOLS.filter((t) => col.categories.includes(t.category)).map((t) => (
+                  <li key={t.slug}>
+                    <Link to={`/${t.slug}` as FileRouteTypes["to"]} className={footLink}>
+                      {t.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <div>
+            <h2 className="label mb-3 font-normal tracking-[0.14em]">Studio</h2>
+            <ul className="grid gap-2 text-sm">
+              <li>
+                <a href="https://xenastudios.co" className={footLink}>
+                  <External>xenastudios.co</External>
+                </a>
+              </li>
+              <li>
+                <a href="https://brand.xenastudios.co" className={footLink}>
+                  <External>Brand</External>
+                </a>
+              </li>
+              <li>
+                <a href={SITE.repo} className={footLink}>
+                  <External>Source</External>
+                </a>
+              </li>
+              <li>
+                <a href={`${SITE.repo}/issues/new/choose`} className={footLink}>
+                  <External>Report a problem</External>
+                </a>
+              </li>
+            </ul>
+          </div>
         </nav>
+      </div>
+      <div className="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-rule py-6 text-[0.8125rem] text-muted">
+        <p className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a
+            href="https://xenastudios.co"
+            aria-label="Xena Studios"
+            className="block text-text transition-colors duration-150 hover:text-accent"
+          >
+            <Logo name="xena" className="block h-3 w-auto" />
+          </a>
+          <span className="label">© {year} Xena Studios</span>
+        </p>
+        <p>
+          Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.
+        </p>
       </div>
     </footer>
   );

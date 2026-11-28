@@ -29,12 +29,13 @@ export const Route = createRootRoute({
     ],
     // Cloudflare Web Analytics: counts visits with no cookies and no personal
     // data. The token is public (it's in every page that uses the beacon); it's
-    // the xenastudios.co site, which reports each subdomain by host.
+    // tools.xenastudios.co's own Web Analytics site (the zone-wide xenastudios.co
+    // site only accepts its automatic injection, which doesn't reach Worker assets).
     scripts: [
       {
         src: "https://static.cloudflareinsights.com/beacon.min.js",
         defer: true,
-        "data-cf-beacon": '{"token": "1b6818b82f294d5aa6c76d35768d8098"}',
+        "data-cf-beacon": '{"token": "bb2c2a1c6a8b486ea8186b65590500e8"}',
       },
     ],
   }),
