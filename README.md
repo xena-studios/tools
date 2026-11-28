@@ -2,9 +2,9 @@
 
 **Tools for running a Minecraft server.**
 
-Free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), at [tools.xenastudios.co](https://tools.xenastudios.co). Every tool runs in your browser, keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
+Free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), at [tools.xenastudios.co](https://tools.xenastudios.co). Every tool that can runs in your browser (Server Status and Player Lookup need a server, and say so), keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
 
-> **Status:** early. Gradient Text, Text Converter, MOTD Generator, Startup Flags, Log Analyzer and Server Icon are live; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
+> **Status:** early. Gradient Text, Text Converter, MOTD Generator, Startup Flags, Log Analyzer, Server Status, Player Lookup and Server Icon are live; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 | Tool                                                          | What it does                                                                                                                                                           |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -13,6 +13,8 @@ Free web tools for people who run Minecraft servers, by [Xena Studios](https://x
 | [MOTD Generator](https://tools.xenastudios.co/motd)           | Two lines with a server-list preview, written for `server.properties`, Velocity, BungeeCord, MiniMOTD or plain MiniMessage                                             |
 | [Startup Flags](https://tools.xenastudios.co/flags)           | Aikar's flags, generational ZGC or Velocity's proxy flags for your RAM, Java and software, as `start.sh`, `start.bat`, a Pterodactyl startup command or Docker compose |
 | [Log Analyzer](https://tools.xenastudios.co/log-analyzer)     | Reads `latest.log`, a `.log.gz` or a crash report (or an mclo.gs link) in your browser, explains each problem with its fix, and groups errors by plugin |
+| [Server Status](https://tools.xenastudios.co/status)          | Checks a Java or Bedrock server (or both, for Geyser): online or not, its MOTD and icon in the server list, version, players, latency and SRV record |
+| [Player Lookup](https://tools.xenastudios.co/player)          | A player's UUID (both forms) and skin from their name, or their name from a UUID; their skin front and back, a head give command, and offline-mode UUIDs |
 | [Server Icon](https://tools.xenastudios.co/server-icon)       | Crops and scales any image to a 64×64 `server-icon.png` in your browser, previewed in the server list                                                                  |
 
 ## What's here
@@ -22,6 +24,7 @@ Free web tools for people who run Minecraft servers, by [Xena Studios](https://x
 | [`apps/web/`](apps/web/)                         | The site: [TanStack Start](https://tanstack.com/start) on a Cloudflare Worker. Every page is prerendered and served as a static asset  |
 | [`packages/mc-text/`](packages/mc-text/)         | Minecraft text: reads and writes legacy codes, MiniMessage and JSON components, gradients and colour maths. No dependencies            |
 | [`packages/mc-flags/`](packages/mc-flags/)       | JVM flags and start scripts: Aikar's flags, generational ZGC per Java version, Velocity's proxy flags, and the checks. No dependencies |
+| [`packages/mc-protocol/`](packages/mc-protocol/) | The Java status ping (VarInts, packets, the response), offline-mode UUIDs (with MD5), UUID and name checks, and server address validation. No dependencies |
 | [`packages/analyzers/`](packages/analyzers/)     | Log and crash report analysis: a parser for Paper, Spigot, vanilla, Fabric, Forge and Velocity logs, a summary, and the rules as data. No dependencies |
 | [`scripts/sync-brand.ts`](scripts/sync-brand.ts) | Copies the logo, icons and colour tokens from [xena-studios/brand](https://github.com/xena-studios/brand)                              |
 | [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md) | Who it's for and how it looks                                                                                                          |
@@ -43,11 +46,13 @@ To add a tool, add it to [`apps/web/src/tools.ts`](apps/web/src/tools.ts) (the h
 
 Brand files are copies: change them in xena-studios/brand, then run `pnpm brand:sync` with the brand repo checked out next to this one (or `BRAND_DIR=…`). Never edit `apps/web/src/brand/` by hand.
 
+Server Status and Player Lookup are the only tools that need the Worker: its API is `/api/status/java`, `/api/player/<name or UUID>` and `/api/skin/<texture hash>`, described in [How the API works](docs/ROADMAP.md#how-the-api-works). `wrangler dev` runs it locally, sockets included.
+
 Pushes to `main` deploy to Cloudflare from GitHub Actions. Running costs are meant to stay at nothing: see [Costs](docs/ROADMAP.md#costs).
 
 ## Contributing
 
-Issues and pull requests are welcome. The org's [contributing guide](https://github.com/xena-studios/.github/blob/main/CONTRIBUTING.md) covers how, and the [security policy](https://github.com/xena-studios/.github/blob/main/SECURITY.md) covers reporting a vulnerability. Commits follow [Conventional Commits](https://www.conventionalcommits.org).
+Issues and pull requests are welcome. The org's [contributing guide](https://github.com/xena-studios/.github/blob/main/CONTRIBUTING.md) covers how, and the [security policy](https://github.com/xena-studios/.github/blob/main/SECURITY.md) covers reporting a vulnerability. The status checker connects to servers on request, so it refuses private, loopback, link-local and reserved addresses, both as typed and after DNS, and connects to the IP it checked; a way round that is a vulnerability, so please report it privately. Commits follow [Conventional Commits](https://www.conventionalcommits.org).
 
 ## Licence
 

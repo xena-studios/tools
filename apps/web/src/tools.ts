@@ -69,7 +69,7 @@ export const TOOLS: readonly Tool[] = [
     summary:
       "Check whether a Java or Bedrock server is online, with its MOTD, version, players and ping.",
     keywords: ["ping", "online", "bedrock", "geyser", "srv", "players"],
-    status: "planned",
+    status: "live",
   },
   {
     slug: "player",
@@ -77,7 +77,7 @@ export const TOOLS: readonly Tool[] = [
     category: "Lookup",
     summary: "Find a player's UUID and skin from their name, or their name from a UUID.",
     keywords: ["uuid", "skin", "head", "name", "mojang", "offline uuid"],
-    status: "planned",
+    status: "live",
   },
   {
     slug: "server-icon",

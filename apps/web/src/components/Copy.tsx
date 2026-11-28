@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
-export function CopyButton({ value, label = "Copy" }: { value: string; label?: string }) {
+export function CopyButton({
+  value,
+  label = "Copy",
+  quiet = false,
+}: {
+  value: string;
+  label?: string;
+  /** A hairline pill instead of solid Ion Blue, where one view has several. */
+  quiet?: boolean;
+}) {
   const [copied, setCopied] = useState(false);
   const timer = useRef<number | undefined>(undefined);
   useEffect(() => () => window.clearTimeout(timer.current), []);
@@ -19,7 +28,7 @@ export function CopyButton({ value, label = "Copy" }: { value: string; label?: s
   return (
     <button
       type="button"
-      className="button primary compact shrink-0"
+      className={`button compact shrink-0 ${quiet ? "" : "primary"}`}
       onClick={copy}
       aria-live="polite"
     >
@@ -33,6 +42,10 @@ interface OutputProps {
   value: string;
   hint?: string;
   warning?: string;
+  /** On a phone, keep this output's copy button in a bar while it's off screen. One per page. */
+  phoneBar?: boolean;
+  /** A hairline Copy pill, for a second output in the same view. */
+  quiet?: boolean;
 }
 
 /** True while the element is off screen. */
@@ -76,13 +89,20 @@ export function PhoneBar({
 }
 
 /** A read-only result with its copy button. */
-export function Output({ label, value, hint, warning }: OutputProps) {
+export function Output({
+  label,
+  value,
+  hint,
+  warning,
+  phoneBar = true,
+  quiet = false,
+}: OutputProps) {
   const panel = useRef<HTMLDivElement>(null);
   const offscreen = useOffscreen(panel);
 
   return (
     <div ref={panel} className="panel p-4">
-      <PhoneBar show={offscreen} label={label}>
+      <PhoneBar show={phoneBar && offscreen} label={label}>
         <CopyButton value={value} />
       </PhoneBar>
       <div className="mb-2 flex items-center justify-between gap-3">
@@ -90,7 +110,7 @@ export function Output({ label, value, hint, warning }: OutputProps) {
           <h3 className="text-sm font-semibold tracking-normal">{label}</h3>
           {hint && <p className="text-xs text-muted">{hint}</p>}
         </div>
-        <CopyButton value={value} />
+        <CopyButton value={value} quiet={quiet} />
       </div>
       <pre className="max-h-48 overflow-auto rounded-lg bg-bg p-3 text-sm break-all whitespace-pre-wrap select-all">
         {value || " "}

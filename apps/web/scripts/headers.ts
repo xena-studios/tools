@@ -27,6 +27,10 @@ const CONNECT: Record<string, string[]> = {
   // The Log Analyzer fetches an mclo.gs log from the browser; mclo.gs sends
   // Access-Control-Allow-Origin: *, so no server of ours sees the log.
   "/log-analyzer": ["https://api.mclo.gs"],
+  // Server Status asks mcstatus.io for Bedrock servers (UDP, which Workers can't
+  // send) and for Java servers on Cloudflare's own network (which Workers can't
+  // open sockets to). It sends Access-Control-Allow-Origin: *.
+  "/status": ["https://api.mcstatus.io"],
 };
 
 const COMMON = [
