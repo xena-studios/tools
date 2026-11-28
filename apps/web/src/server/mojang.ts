@@ -6,6 +6,12 @@
 //   UUID -> profile: sessionserver.mojang.com/session/minecraft/profile/<uuid>
 //     (204 if none), whose base64 "textures" property holds the skin and cape.
 //
+// Mojang's API often refuses Cloudflare Workers outright (it answers our
+// requests with errors while answering everyone else), so when it fails the
+// lookup falls back to playerdb.co, a public cache of the same Mojang data that
+// returns the same base64 "textures" property. A miss is only trusted from
+// Mojang: playerdb can't tell "no such player" from "Mojang didn't answer".
+//
 // Mojang allows about 200 requests per 2 minutes per IP on the name lookup,
 // and Workers share IPs, so found players are cached for an hour and misses
 // for five minutes. A name nobody has is a 200 with ok: false (it's an answer,
@@ -56,6 +62,7 @@ async function uuidForName(name: string): Promise<string | null> {
       const body = await readJson<{ id?: string }>(res);
       return body.id ? parseUuid(body.id) : null;
     }
+    console.warn(`name lookup answered ${res.status} from ${new URL(url).host}`);
     last = new Upstream(res.status === 429 ? "rate_limited" : "upstream_error");
     // 429 is per IP; the other host shares the limit, so don't spend it.
     if (res.status === 429) break;
@@ -75,6 +82,12 @@ function textureHash(url: string | undefined): string | null {
   return m?.[1] && TEXTURE_HASH.test(m[1]) ? m[1] : null;
 }
 
+interface ProfileBody {
+  id?: string;
+  name?: string;
+  properties?: { name?: string; value?: string }[];
+}
+
 /** The profile with its skin and cape, or null if the UUID has no account. */
 async function profile(uuid: string): Promise<Player | null> {
   let res: Response;
@@ -85,12 +98,15 @@ async function profile(uuid: string): Promise<Player | null> {
   }
   if (res.status === 204 || res.status === 404 || res.status === 400) return null;
   if (res.status === 429) throw new Upstream("rate_limited");
-  if (!res.ok) throw new Upstream("upstream_error");
-  const body = await readJson<{
-    id?: string;
-    name?: string;
-    properties?: { name?: string; value?: string }[];
-  }>(res);
+  if (!res.ok) {
+    console.warn(`sessionserver answered ${res.status}`);
+    throw new Upstream("upstream_error");
+  }
+  return fromProfile(await readJson<ProfileBody>(res));
+}
+
+/** A player from a sessionserver-shaped profile (Mojang's, or playerdb's copy of it). */
+function fromProfile(body: ProfileBody): Player | null {
   const id = parseUuid(body.id ?? "");
   if (!id || typeof body.name !== "string") return null;
 
@@ -116,6 +132,30 @@ async function profile(uuid: string): Promise<Player | null> {
       : null,
     cape: capeHash ? { hash: capeHash } : null,
   };
+}
+
+/** The fallback: playerdb.co, by name or UUID. Null when it has no answer either. */
+async function fromPlayerDb(input: string): Promise<Player | null> {
+  let res: Response;
+  try {
+    res = await get(`https://playerdb.co/api/player/minecraft/${encodeURIComponent(input)}`);
+  } catch {
+    return null;
+  }
+  if (!res.ok) return null;
+  try {
+    const body = await readJson<{
+      success?: boolean;
+      data?: {
+        player?: { raw_id?: string; username?: string; properties?: ProfileBody["properties"] };
+      };
+    }>(res);
+    const p = body.success ? body.data?.player : undefined;
+    if (!p) return null;
+    return fromProfile({ id: p.raw_id, name: p.username, properties: p.properties });
+  } catch {
+    return null;
+  }
 }
 
 const MESSAGES = {
@@ -154,6 +194,8 @@ export async function lookupPlayer(input: string): Promise<Answer> {
     return result({ ok: true, checkedAt, player }, 200, FOUND_TTL);
   } catch (e) {
     const code = e instanceof Upstream ? e.code : "upstream_error";
+    const fallback = await fromPlayerDb(input);
+    if (fallback) return result({ ok: true, checkedAt, player: fallback }, 200, FOUND_TTL);
     return result(
       { ok: false, checkedAt, error: code, message: MESSAGES[code] },
       code === "rate_limited" ? 429 : 502,
