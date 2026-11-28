@@ -11,7 +11,7 @@ What's built, what's next, and how the rest will work. A tool is planned until i
 | Gradient Text  | Built | Every legacy hex form, MiniMessage (per letter or the `<gradient>` tag), JSON for 1.21.5+ and older                                                                                                            |
 | Text Converter | Built | Reads legacy, MiniMessage and JSON; writes all of them; warns what a format can't hold                                                                                                                         |
 | MOTD Generator | Built | Two lines with a server-list preview; output for `server.properties` (`§` escapes, hex for Paper or the 16 colours for vanilla), Velocity, BungeeCord, MiniMOTD and MiniMessage                       |
-| Startup Flags  | Next  | RAM, Java version, software (Paper, Velocity, Fabric…), G1 (Aikar's) or generational ZGC; `start.sh`, `start.bat`, Pterodactyl and Docker; warns about common mistakes                                         |
+| Startup Flags  | Built | RAM, Java (17, 21, 25), software (Paper, Purpur, Folia, Velocity, BungeeCord, Fabric, Forge, vanilla), Aikar's G1 or generational ZGC; `start.sh`, `start.bat`, Pterodactyl and Docker; warns about the Java version, memory and headroom |
 | Log Analyzer   | Next  | Paste `latest.log` or a crash report, or an mclo.gs link. Rules in data files (wrong Java, missing dependency, port in use, "Can't keep up", errors grouped by plugin), each with a fix. Parsed in the browser |
 | Server Status  | Next  | Java and Bedrock, with the MOTD drawn by ServerList, version, players, icon, latency, SRV                                                                                                                          |
 | Player Lookup  | Next  | Name to UUID and back, skin and cape viewer, head give command, offline-mode UUID                                                                                                                              |
@@ -38,7 +38,7 @@ What's built, what's next, and how the rest will work. A tool is planned until i
 | Player Lookup           | Mojang's API doesn't allow cross-origin calls, and answers should be cached                                                                                                                                                                                                               |
 | spark reader            | Fetching profiles from spark's bytebin (no CORS)                                                                                                                                                                                                                                          |
 
-- **Shared logic lives in packages** with tests: `mc-text` now; `mc-protocol` (status ping), `analyzers` (log and config rules) and `mc-data` (versions, `pack_format`s, items, generated from public data) as their tools arrive.
+- **Shared logic lives in packages** with tests: `mc-text` and `mc-flags` now; `mc-protocol` (status ping), `analyzers` (log and config rules) and `mc-data` (versions, `pack_format`s, items, generated from public data) as their tools arrive.
 - **No Mojang assets.** No game textures, font or logos in the repo or on the site. Previews use Monocraft (OFL); item and block icons, when a tool needs them, will be drawn by us or loaded by the visitor's browser from a public source.
 
 ## Costs

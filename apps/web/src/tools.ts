@@ -51,7 +51,7 @@ export const TOOLS: readonly Tool[] = [
     summary:
       "Generate a start script with tuned JVM flags for your RAM, Java version and server software.",
     keywords: ["aikar", "jvm", "java", "zgc", "g1gc", "start.sh", "pterodactyl", "memory"],
-    status: "planned",
+    status: "live",
   },
   {
     slug: "log-analyzer",
