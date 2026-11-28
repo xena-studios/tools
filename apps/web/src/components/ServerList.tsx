@@ -27,14 +27,27 @@ interface ServerListProps {
   motd: Span[];
   online?: number;
   max?: number;
-  /** An image URL (a blob: or same-origin file). Without one, a placeholder is drawn. */
+  /** An image URL (a blob:, data: or same-origin file). Without one, a placeholder is drawn. */
   icon?: string;
+  /** The ping in ms, for the bars, as the game counts them. Unset draws full signal. */
+  ping?: number | null;
+  /** Draws the game's "can't connect" cross instead of bars. */
+  offline?: boolean;
   className?: string;
 }
 
 const plain = (text: string, color: string): Span => ({ text, style: { color } });
 
-export function ServerList({ name, motd, online, max, icon, className = "" }: ServerListProps) {
+export function ServerList({
+  name,
+  motd,
+  online,
+  max,
+  icon,
+  ping,
+  offline = false,
+  className = "",
+}: ServerListProps) {
   const hasCount = online !== undefined && max !== undefined;
   return (
     <figure className={`server-list m-0 ${className}`} aria-label="Server list preview">
@@ -59,7 +72,7 @@ export function ServerList({ name, motd, online, max, icon, className = "" }: Se
                   />
                 </span>
               )}
-              <SignalBars />
+              {offline ? <Unreachable /> : <SignalBars ping={ping} />}
             </span>
           </div>
           <p className="server-motd">
@@ -71,20 +84,53 @@ export function ServerList({ name, motd, online, max, icon, className = "" }: Se
   );
 }
 
-/** Five bars, full signal. */
-function SignalBars() {
+/** How many bars the game lights for a ping: under 150 ms is five, then 300, 600 and 1000. */
+export function signalBars(ping: number | null | undefined): number {
+  if (ping === undefined || ping === null || ping < 0) return 5;
+  if (ping < 150) return 5;
+  if (ping < 300) return 4;
+  if (ping < 600) return 3;
+  if (ping < 1000) return 2;
+  return 1;
+}
+
+/** Five bars, the lit ones green and the rest dark, as the game draws them. */
+function SignalBars({ ping }: { ping?: number | null }) {
   const heights = [2, 3.5, 5, 6.5, 8];
+  const lit = signalBars(ping);
   return (
     <svg
       className="server-bars"
       viewBox="0 0 10 8"
       role="img"
-      aria-label="Full signal"
+      aria-label={lit === 5 ? "Full signal" : `Signal: ${lit} of 5 bars`}
       shapeRendering="crispEdges"
     >
       {heights.map((h, i) => (
-        <rect key={h} x={i * 2} y={8 - h} width={1.25} height={h} fill="#55FF55" />
+        <rect
+          key={h}
+          x={i * 2}
+          y={8 - h}
+          width={1.25}
+          height={h}
+          fill={i < lit ? "#55FF55" : "#3A3A3A"}
+        />
       ))}
+    </svg>
+  );
+}
+
+/** The game's sign for a server it can't reach: a red cross where the bars go. */
+function Unreachable() {
+  return (
+    <svg
+      className="server-bars"
+      viewBox="0 0 10 8"
+      role="img"
+      aria-label="Can't connect"
+      shapeRendering="crispEdges"
+    >
+      <path d="M2 0.5 8 7.5M8 0.5 2 7.5" stroke="#FF5555" strokeWidth="1.5" fill="none" />
     </svg>
   );
 }

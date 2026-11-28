@@ -14,8 +14,13 @@ import { Route as FlagsRouteImport } from './routes/flags'
 import { Route as GradientRouteImport } from './routes/gradient'
 import { Route as LogAnalyzerRouteImport } from './routes/log-analyzer'
 import { Route as MotdRouteImport } from './routes/motd'
+import { Route as PlayerRouteImport } from './routes/player'
 import { Route as ServerIconRouteImport } from './routes/server-icon'
+import { Route as StatusRouteImport } from './routes/status'
 import { Route as TextConverterRouteImport } from './routes/text-converter'
+import { Route as ApiPlayerIdRouteImport } from './routes/api/player/$id'
+import { Route as ApiSkinHashRouteImport } from './routes/api/skin/$hash'
+import { Route as ApiStatusJavaRouteImport } from './routes/api/status/java'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -42,14 +47,39 @@ const MotdRoute = MotdRouteImport.update({
   path: '/motd',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlayerRoute = PlayerRouteImport.update({
+  id: '/player',
+  path: '/player',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServerIconRoute = ServerIconRouteImport.update({
   id: '/server-icon',
   path: '/server-icon',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TextConverterRoute = TextConverterRouteImport.update({
   id: '/text-converter',
   path: '/text-converter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPlayerIdRoute = ApiPlayerIdRouteImport.update({
+  id: '/api/player/$id',
+  path: '/api/player/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSkinHashRoute = ApiSkinHashRouteImport.update({
+  id: '/api/skin/$hash',
+  path: '/api/skin/$hash',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStatusJavaRoute = ApiStatusJavaRouteImport.update({
+  id: '/api/status/java',
+  path: '/api/status/java',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -59,8 +89,13 @@ export interface FileRoutesByFullPath {
   '/gradient': typeof GradientRoute
   '/log-analyzer': typeof LogAnalyzerRoute
   '/motd': typeof MotdRoute
+  '/player': typeof PlayerRoute
   '/server-icon': typeof ServerIconRoute
+  '/status': typeof StatusRoute
   '/text-converter': typeof TextConverterRoute
+  '/api/player/$id': typeof ApiPlayerIdRoute
+  '/api/skin/$hash': typeof ApiSkinHashRoute
+  '/api/status/java': typeof ApiStatusJavaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,8 +103,13 @@ export interface FileRoutesByTo {
   '/gradient': typeof GradientRoute
   '/log-analyzer': typeof LogAnalyzerRoute
   '/motd': typeof MotdRoute
+  '/player': typeof PlayerRoute
   '/server-icon': typeof ServerIconRoute
+  '/status': typeof StatusRoute
   '/text-converter': typeof TextConverterRoute
+  '/api/player/$id': typeof ApiPlayerIdRoute
+  '/api/skin/$hash': typeof ApiSkinHashRoute
+  '/api/status/java': typeof ApiStatusJavaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -78,8 +118,13 @@ export interface FileRoutesById {
   '/gradient': typeof GradientRoute
   '/log-analyzer': typeof LogAnalyzerRoute
   '/motd': typeof MotdRoute
+  '/player': typeof PlayerRoute
   '/server-icon': typeof ServerIconRoute
+  '/status': typeof StatusRoute
   '/text-converter': typeof TextConverterRoute
+  '/api/player/$id': typeof ApiPlayerIdRoute
+  '/api/skin/$hash': typeof ApiSkinHashRoute
+  '/api/status/java': typeof ApiStatusJavaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -89,8 +134,13 @@ export interface FileRouteTypes {
     | '/gradient'
     | '/log-analyzer'
     | '/motd'
+    | '/player'
     | '/server-icon'
+    | '/status'
     | '/text-converter'
+    | '/api/player/$id'
+    | '/api/skin/$hash'
+    | '/api/status/java'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -98,8 +148,13 @@ export interface FileRouteTypes {
     | '/gradient'
     | '/log-analyzer'
     | '/motd'
+    | '/player'
     | '/server-icon'
+    | '/status'
     | '/text-converter'
+    | '/api/player/$id'
+    | '/api/skin/$hash'
+    | '/api/status/java'
   id:
     | '__root__'
     | '/'
@@ -107,8 +162,13 @@ export interface FileRouteTypes {
     | '/gradient'
     | '/log-analyzer'
     | '/motd'
+    | '/player'
     | '/server-icon'
+    | '/status'
     | '/text-converter'
+    | '/api/player/$id'
+    | '/api/skin/$hash'
+    | '/api/status/java'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,8 +177,13 @@ export interface RootRouteChildren {
   GradientRoute: typeof GradientRoute
   LogAnalyzerRoute: typeof LogAnalyzerRoute
   MotdRoute: typeof MotdRoute
+  PlayerRoute: typeof PlayerRoute
   ServerIconRoute: typeof ServerIconRoute
+  StatusRoute: typeof StatusRoute
   TextConverterRoute: typeof TextConverterRoute
+  ApiPlayerIdRoute: typeof ApiPlayerIdRoute
+  ApiSkinHashRoute: typeof ApiSkinHashRoute
+  ApiStatusJavaRoute: typeof ApiStatusJavaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -158,6 +223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MotdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/player': {
+      id: '/player'
+      path: '/player'
+      fullPath: '/player'
+      preLoaderRoute: typeof PlayerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/server-icon': {
       id: '/server-icon'
       path: '/server-icon'
@@ -165,11 +237,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServerIconRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/text-converter': {
       id: '/text-converter'
       path: '/text-converter'
       fullPath: '/text-converter'
       preLoaderRoute: typeof TextConverterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/player/$id': {
+      id: '/api/player/$id'
+      path: '/api/player/$id'
+      fullPath: '/api/player/$id'
+      preLoaderRoute: typeof ApiPlayerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/skin/$hash': {
+      id: '/api/skin/$hash'
+      path: '/api/skin/$hash'
+      fullPath: '/api/skin/$hash'
+      preLoaderRoute: typeof ApiSkinHashRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/status/java': {
+      id: '/api/status/java'
+      path: '/api/status/java'
+      fullPath: '/api/status/java'
+      preLoaderRoute: typeof ApiStatusJavaRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -181,8 +281,13 @@ const rootRouteChildren: RootRouteChildren = {
   GradientRoute: GradientRoute,
   LogAnalyzerRoute: LogAnalyzerRoute,
   MotdRoute: MotdRoute,
+  PlayerRoute: PlayerRoute,
   ServerIconRoute: ServerIconRoute,
+  StatusRoute: StatusRoute,
   TextConverterRoute: TextConverterRoute,
+  ApiPlayerIdRoute: ApiPlayerIdRoute,
+  ApiSkinHashRoute: ApiSkinHashRoute,
+  ApiStatusJavaRoute: ApiStatusJavaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

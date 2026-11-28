@@ -619,6 +619,57 @@ svg.horizon {
   overflow-wrap: anywhere;
 }
 
+/* A loading stand-in, shaped like what's coming. It breathes gently, and holds
+   still with reduced motion. */
+.skeleton {
+  display: block;
+  border-radius: 4px;
+  background: var(--surface);
+  animation: breathe 1.4s var(--ease) infinite alternate;
+}
+@keyframes breathe {
+  to {
+    opacity: 0.5;
+  }
+}
+
+/* Facts about a result, as hairline rows: the name in a label column, the value beside it. */
+.facts {
+  margin: 0;
+}
+.facts > div {
+  display: grid;
+  grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr);
+  gap: var(--s-1) var(--s-4);
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--rule);
+}
+.facts > div:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.facts dt {
+  font-size: var(--t-small);
+  color: var(--muted);
+}
+.facts dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 30rem) {
+  .facts > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* A skin, drawn flat from its PNG at a whole number of screen pixels per skin pixel. */
+.skin-canvas {
+  display: block;
+  image-rendering: pixelated;
+}
+
 /* Range sliders, from the tokens: a hairline track filled in Ion Blue up to the
    thumb (--fill, set by the page), and a text-coloured thumb with the focus ring. */
 .range {
