@@ -1,0 +1,14 @@
+{
+  "name": "@xena-tools/mc-protocol",
+  "description": "Minecraft protocol bits: VarInts, the Java Server List Ping packets and its response, offline-mode UUIDs (with MD5), UUID and username checks, and server address validation",
+  "version": "0.0.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p ."
+  }
+}
