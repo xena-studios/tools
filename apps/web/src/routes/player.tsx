@@ -385,6 +385,8 @@ function Guide() {
         </li>
         <li>
           Lookups go through our server to Mojang, which doesn't allow browsers to ask directly.
+          When Mojang doesn't answer us, the lookup uses{" "}
+          <a href="https://playerdb.co">playerdb.co</a>, a public copy of the same Mojang data.
           Found players are kept for an hour and names nobody has for five minutes, so a skin
           changed in the last hour may show the old one.
         </li>
