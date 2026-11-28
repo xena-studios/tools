@@ -4,7 +4,7 @@
 // them, are in public/_headers.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "xena-tools",
+  "name": "xenastudios-tools",
   "compatibility_date": "2026-11-23",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
