@@ -196,6 +196,9 @@ importers:
       '@xena-tools/mc-flags':
         specifier: workspace:*
         version: link:../../packages/mc-flags
+      '@xena-tools/mc-protocol':
+        specifier: workspace:*
+        version: link:../../packages/mc-protocol
       '@xena-tools/mc-text':
         specifier: workspace:*
         version: link:../../packages/mc-text
@@ -240,6 +243,8 @@ importers:
   packages/analyzers: {}
 
   packages/mc-flags: {}
+
+  packages/mc-protocol: {}
 
   packages/mc-text: {}
 
