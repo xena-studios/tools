@@ -1,0 +1,17 @@
+[12:00:00 INFO]: Booting up Velocity 3.4.0-SNAPSHOT (git-4a5c2c0f-b487)...
+[12:00:00 INFO]: Loading localizations...
+[12:00:01 WARN]: The proxy is running in offline mode! This is a security risk and you will NOT receive any support!
+[12:00:01 WARN]: Player info forwarding is disabled! All players will appear to be connecting from the proxy and will have offline-mode UUIDs.
+[12:00:01 INFO]: Connections will use epoll channels, libdeflate (Linux x86_64) compression, OpenSSL 3.x.x (Linux x86_64) ciphers
+[12:00:01 INFO]: Loading plugins...
+[12:00:02 INFO]: Loaded plugin luckperms 5.4.145 by Luck
+[12:00:02 INFO]: Loaded 1 plugins
+[12:00:02 ERROR]: Can't bind to 0.0.0.0/0.0.0.0:25577
+io.netty.channel.unix.Errors$NativeIoException: bind(..) failed: Address already in use
+[12:00:02 INFO]: Done (2.31s)!
+[12:01:10 INFO]: [connected player] Steve (/192.0.2.10:51234) has connected
+[12:01:10 ERROR]: [connected player] Steve (/192.0.2.10:51234): unable to connect to server lobby
+java.lang.IllegalStateException: Backend server is online-mode!
+	at com.velocitypowered.proxy.connection.backend.LoginSessionHandler.handle(LoginSessionHandler.java:123)
+	at com.velocitypowered.proxy.protocol.packet.EncryptionRequestPacket.handle(EncryptionRequestPacket.java:88)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)

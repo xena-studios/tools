@@ -10,6 +10,7 @@ colors:
   text: "#EDF1F7"
   accent: "#5CB4FF"
   danger: "#FF8A8A"
+  warning: "#F2C46D"
 typography:
   display:
     fontFamily: "JetBrains Mono Variable, ui-monospace, SFMono-Regular, Menlo, monospace"
@@ -167,15 +168,16 @@ Restrained: tinted deep-space neutrals carry the page, and Ion Blue appears on w
 
 ### State
 
-- **Danger** (`danger`): the one colour the studio's palette doesn't have, added by this site for errors only: an invalid field's border and the error line under it. 8.8:1 on void.
+- **Danger** (`danger`): a colour the studio's palette doesn't have, added by this site for errors only: an invalid field's border, the error line under it, and the Log Analyzer's errors. 8.8:1 on void.
+- **Warning** (`warning`): amber, the second state colour, for warnings only: the Log Analyzer's warnings and a WARN line's mark in its log viewer. 12.3:1 on void. Never an accent, never decoration.
 
 ### Named Rules
 
-**The Brand Repo Rule.** Every site colour is a brand token, synced with `pnpm brand:sync` and never retyped. Danger is the one addition.
+**The Brand Repo Rule.** Every site colour is a brand token, synced with `pnpm brand:sync` and never retyped. Danger and warning, the two state colours, are the only additions.
 
 **The One Accent Rule.** Ion Blue is the only accent. Selected, focused, primary and current all use it; nothing else gets a colour.
 
-**The Words First Rule.** Danger is always paired with words saying what's wrong; colour never carries meaning alone.
+**The Words First Rule.** Danger and warning are always paired with words saying what's wrong, and with a drawn shape where there's a severity (an octagon for an error, a triangle for a warning, a circle for a note); colour never carries meaning alone.
 
 **The sRGB Tint Rule.** Translucent colours mix in sRGB (`color-mix(in srgb, X, transparent)`); oklch mixing with `transparent` drifts the hue. Mixing two solid colours (a hover border warming toward Ion Blue) may use oklch.
 
@@ -322,8 +324,13 @@ Draws spans the way the game does, in Monocraft at 1.25 line height, with `pre-w
 
 ### External and inward links
 
-- **External** (`Brand.tsx`): the site's only icon, an outbound arrow drawn as SVG at 0.62em in `currentColor` with a 1.4 stroke, nudging up and right on hover. It wraps the link's last word so it never wraps alone.
+- **Severity** (`Severity.tsx`): an octagon with a cross (error), a triangle with a bar (warning) and a circle with a bar (note), drawn as SVG in `currentColor` with the same 1.4 stroke, always beside the word.
+- **External** (`Brand.tsx`): an icon an outbound arrow drawn as SVG at 0.62em in `currentColor` with a 1.4 stroke, nudging up and right on hover. It wraps the link's last word so it never wraps alone.
 - **Inward chevron** (`.more`): drawn in CSS with two 1.4px borders, nudging right on hover of its row.
+
+### Log viewer
+
+`components/LogViewer.tsx`: a log of up to tens of thousands of lines on void in a 12px box, filtered by level (choice pills) and by plugin (a native select styled as a field, with the CSS chevron). Rows are a fixed 24px, mono at 0.75rem, unwrapped, and only those in view (plus 30 either side) are rendered, so the box scrolls sideways and the line-number gutter stays put. An ERROR or WARN entry's first line carries its severity shape in the gutter. A line jumped to from a problem is tinted Ion Blue at 14%.
 
 ### Horizon
 
@@ -341,7 +348,7 @@ Every tool keeps its settings in the query string (`lib/url-state.ts`) with shor
 
 ### Do:
 
-- **Do** take every colour, logo and scene from the brand repo (`pnpm brand:sync`); add only `danger`, and only for errors.
+- **Do** take every colour, logo and scene from the brand repo (`pnpm brand:sync`); add only `danger` for errors and `warning` for warnings.
 - **Do** keep the preview and the copy button in the first screen, and the copy button in reach on a phone.
 - **Do** build every control as a pill backed by a real radio button, checkbox or button.
 - **Do** name formats by where they're used ("MiniMessage", "&#RRGGBB", "JSON for /tellraw") and say plainly where the preview is only close.
@@ -356,7 +363,7 @@ Every tool keeps its settings in the query string (`lib/url-state.ts`) with shor
 - **Don't** add stars, particles, glows beyond the horizon, gradient text on the chrome, angled panels or card grids.
 - **Don't** put a kicker or eyebrow over anything but a page's h1.
 - **Don't** use Monocraft outside previews and game-text inputs.
-- **Don't** use Unicode arrows or emoji as icons; the External arrow and the CSS chevron are the only ones.
+- **Don't** use Unicode arrows or emoji as icons; the External arrow, the severity shapes and the CSS chevron are the only ones.
 - **Don't** animate on scroll or on entry beyond the home hero.
 - **Don't** inline scripts the CSP hasn't hashed, or inline fonts as `data:` URLs.
 - **Don't** show a tool that isn't built as if it were; planned tools are plain rows under "Next up".

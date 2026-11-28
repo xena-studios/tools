@@ -1,0 +1,15 @@
+{
+  "name": "@xena-tools/analyzers",
+  "description": "Minecraft server log and crash report analysis: a parser for Paper, Spigot, vanilla, Fabric, Forge and Velocity logs, a summary, and a rule engine with the common problems and their fixes",
+  "version": "0.0.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./fixtures/*": "./fixtures/*"
+  },
+  "scripts": {
+    "typecheck": "tsc -p ."
+  }
+}
