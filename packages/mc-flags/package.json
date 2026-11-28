@@ -1,0 +1,14 @@
+{
+  "name": "@xena-tools/mc-flags",
+  "description": "JVM flags and start scripts for Minecraft servers and proxies: Aikar's flags, generational ZGC and Velocity's proxy flags",
+  "version": "0.0.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p ."
+  }
+}

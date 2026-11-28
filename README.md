@@ -4,24 +4,26 @@
 
 Free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), at [tools.xenastudios.co](https://tools.xenastudios.co). Every tool runs in your browser, keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
 
-> **Status:** early. Gradient Text, Text Converter, MOTD Generator and Server Icon are live; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
+> **Status:** early. Gradient Text, Text Converter, MOTD Generator, Startup Flags and Server Icon are live; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-| Tool                                                          | What it does                                                                                                                   |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| [Gradient Text](https://tools.xenastudios.co/gradient)        | Colours text with a gradient, written as MiniMessage, `&#RRGGBB`, `&x&R&R…`, `{#RRGGBB}`, `<#RRGGBB>`, 16-colour codes or JSON |
-| [Text Converter](https://tools.xenastudios.co/text-converter) | Reads legacy codes, MiniMessage or JSON, shows it as players will see it, and converts it to any of the others                 |
-| [MOTD Generator](https://tools.xenastudios.co/motd)           | Two lines with a server-list preview, written for `server.properties`, Velocity, BungeeCord, MiniMOTD or plain MiniMessage     |
-| [Server Icon](https://tools.xenastudios.co/server-icon)       | Crops and scales any image to a 64×64 `server-icon.png` in your browser, previewed in the server list                          |
+| Tool                                                          | What it does                                                                                                                                                           |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Gradient Text](https://tools.xenastudios.co/gradient)        | Colours text with a gradient, written as MiniMessage, `&#RRGGBB`, `&x&R&R…`, `{#RRGGBB}`, `<#RRGGBB>`, 16-colour codes or JSON                                         |
+| [Text Converter](https://tools.xenastudios.co/text-converter) | Reads legacy codes, MiniMessage or JSON, shows it as players will see it, and converts it to any of the others                                                         |
+| [MOTD Generator](https://tools.xenastudios.co/motd)           | Two lines with a server-list preview, written for `server.properties`, Velocity, BungeeCord, MiniMOTD or plain MiniMessage                                             |
+| [Startup Flags](https://tools.xenastudios.co/flags)           | Aikar's flags, generational ZGC or Velocity's proxy flags for your RAM, Java and software, as `start.sh`, `start.bat`, a Pterodactyl startup command or Docker compose |
+| [Server Icon](https://tools.xenastudios.co/server-icon)       | Crops and scales any image to a 64×64 `server-icon.png` in your browser, previewed in the server list                                                                  |
 
 ## What's here
 
-|                                                  |                                                                                                                                       |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| [`apps/web/`](apps/web/)                         | The site: [TanStack Start](https://tanstack.com/start) on a Cloudflare Worker. Every page is prerendered and served as a static asset |
-| [`packages/mc-text/`](packages/mc-text/)         | Minecraft text: reads and writes legacy codes, MiniMessage and JSON components, gradients and colour maths. No dependencies           |
-| [`scripts/sync-brand.ts`](scripts/sync-brand.ts) | Copies the logo, icons and colour tokens from [xena-studios/brand](https://github.com/xena-studios/brand)                             |
-| [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md) | Who it's for and how it looks                                                                                                         |
-| [docs/ROADMAP.md](docs/ROADMAP.md)               | The tools still to come, and how they'll be built                                                                                     |
+|                                                  |                                                                                                                                        |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| [`apps/web/`](apps/web/)                         | The site: [TanStack Start](https://tanstack.com/start) on a Cloudflare Worker. Every page is prerendered and served as a static asset  |
+| [`packages/mc-text/`](packages/mc-text/)         | Minecraft text: reads and writes legacy codes, MiniMessage and JSON components, gradients and colour maths. No dependencies            |
+| [`packages/mc-flags/`](packages/mc-flags/)       | JVM flags and start scripts: Aikar's flags, generational ZGC per Java version, Velocity's proxy flags, and the checks. No dependencies |
+| [`scripts/sync-brand.ts`](scripts/sync-brand.ts) | Copies the logo, icons and colour tokens from [xena-studios/brand](https://github.com/xena-studios/brand)                              |
+| [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md) | Who it's for and how it looks                                                                                                          |
+| [docs/ROADMAP.md](docs/ROADMAP.md)               | The tools still to come, and how they'll be built                                                                                      |
 
 ## Building
 
