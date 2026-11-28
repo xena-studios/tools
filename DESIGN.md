@@ -302,14 +302,14 @@ Draws spans the way the game does, in Monocraft at 1.25 line height, with `pre-w
 
 ### ServerList
 
-`components/ServerList.tsx`: one entry of the game's multiplayer screen, used by the MOTD Generator and Server Icon, and meant for Server Status. Everything in it is drawn by us: no game textures, sprites or font.
+`components/ServerList.tsx`: one entry of the game's multiplayer screen, used by the MOTD Generator, Server Icon and Server Status. Everything in it is drawn by us: no game textures, sprites or font.
 
 - **Grid:** laid out in game pixels (`--gp`), as the game lays out the row: 305 wide, a 32-pixel icon, a 3-pixel gap, then 267 pixels for the name and the MOTD. A game pixel is 2px where there's room and shrinks with the container (`100cqw / 306`) on a phone, so the proportions hold at any width.
 - **Icon:** 64×64 on screen at 2×, `image-rendering: pixelated`. With no icon it draws a placeholder: a dark square with a hairline and a small landscape.
 - **Name:** white, with the game's shadow.
 - **MOTD:** McText's line renderer in Monocraft at 9 game pixels to the em (Monocraft's own grid: 9 to the em, 6 to an advance), line height 9. It wraps in the 267-pixel box and clips after two lines, as the game does. Uncoloured text is the list's grey, `#808080`, a step darker than chat's.
 - **Player count:** top right, the numbers in gray (`#AAAAAA`) and the slash in dark grey (`#555555`), as the game draws them.
-- **Signal:** five green bars, our own SVG, 10×8 game pixels.
+- **Signal:** five bars, our own SVG, 10×8 game pixels, lit green by ping as the game counts them (five under 150 ms, then 300, 600 and 1000) and dark grey beyond. An unreachable server gets a red cross instead, and Server Status draws its MOTD as the game's dark red "Can't connect to server".
 - **Backdrop:** a plain near-black (`#0C0C0C`) panel, 12px radius. No menu texture.
 - **Honesty:** Monocraft is monospaced and the game's font isn't, so widths and wrap points are close, not exact; the guides say so.
 
