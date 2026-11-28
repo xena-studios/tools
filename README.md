@@ -4,7 +4,7 @@
 
 Free web tools for people who run Minecraft servers, by [Xena Studios](https://xenastudios.co), at [tools.xenastudios.co](https://tools.xenastudios.co). Every tool that can runs in your browser (Server Status and Player Lookup need a server, and say so), keeps its settings in the link so you can share them, and gives you output that's ready to paste into your server.
 
-> **Status:** early. Gradient Text, Text Converter, MOTD Generator, Startup Flags, Log Analyzer, Server Status, Player Lookup and Server Icon are live; the rest are planned, in [docs/ROADMAP.md](docs/ROADMAP.md).
+> **Status:** all eight tools below are live. What's planned next is in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 | Tool                                                          | What it does                                                                                                                                                           |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -42,11 +42,11 @@ pnpm check        # lint, typecheck, test and build: what CI runs
 
 `pnpm --filter web build` builds the site to `apps/web/dist`, prerendering every page and writing `_headers` with a content security policy per page (`apps/web/scripts/headers.ts`). `pnpm exec wrangler dev` in `apps/web` serves the build as Cloudflare will.
 
-To add a tool, add it to [`apps/web/src/tools.ts`](apps/web/src/tools.ts) (the home page, the ⌘K search and the sitemap read from it), then add its page in `apps/web/src/routes/<slug>.tsx` using `ToolPage`. Logic that isn't about the page goes in a package, with tests.
+To add a tool, add it to [`apps/web/src/tools.ts`](apps/web/src/tools.ts) (the home page, the ⌘K search and the sitemap read from it; its category groups it in both), then add its page in `apps/web/src/routes/<slug>.tsx` using `ToolPage`. Logic that isn't about the page goes in a package, with tests.
 
 Brand files are copies: change them in xena-studios/brand, then run `pnpm brand:sync` with the brand repo checked out next to this one (or `BRAND_DIR=…`). Never edit `apps/web/src/brand/` by hand.
 
-Server Status and Player Lookup are the only tools that need the Worker: its API is `/api/status/java`, `/api/player/<name or UUID>` and `/api/skin/<texture hash>`, described in [How the API works](docs/ROADMAP.md#how-the-api-works). `wrangler dev` runs it locally, sockets included.
+Server Status and Player Lookup are the only tools that need the Worker: its API is `/api/status/java`, `/api/player/<name or UUID>` and `/api/skin/<texture hash>`, described in [How the API works](docs/ROADMAP.md#how-the-api-works). Player lookups fall back to [playerdb.co](https://playerdb.co) when Mojang refuses the Worker. Bedrock servers, and Java servers on Cloudflare's own network (which Workers can't open sockets to), are checked with [mcstatus.io](https://mcstatus.io) from the browser instead. `wrangler dev` runs it locally, sockets included.
 
 Pushes to `main` deploy to Cloudflare from GitHub Actions. Running costs are meant to stay at nothing: see [Costs](docs/ROADMAP.md#costs).
 
