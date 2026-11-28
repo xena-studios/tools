@@ -59,8 +59,8 @@ export const TOOLS: readonly Tool[] = [
     category: "Server",
     summary:
       "Paste a server log or crash report and get the problems explained, with the fix for each.",
-    keywords: ["crash", "latest.log", "error", "exception", "mclo.gs", "debug"],
-    status: "planned",
+    keywords: ["crash", "latest.log", "error", "exception", "mclo.gs", "debug", "crash report"],
+    status: "live",
   },
   {
     slug: "status",

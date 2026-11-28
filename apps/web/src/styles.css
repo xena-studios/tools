@@ -18,6 +18,9 @@
   /* The studio has no error colour; this is the one state colour the tools add,
      always paired with words, never alone. */
   --danger: #ff8a8a;
+  /* The second state colour: amber, for warnings only, beside the word and the
+     triangle. 12.3:1 on void. */
+  --warning: #f2c46d;
 
   --font: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
@@ -329,6 +332,144 @@
     height: 1px;
     background: var(--accent);
   }
+}
+
+/* A native select as a field: the studio's chevron, drawn in CSS like .more. */
+.select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.15rem) 52%,
+    calc(100% - 0.8rem) 52%;
+  background-size: 0.35rem 0.35rem;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.select option {
+  background: var(--raised);
+  color: var(--text);
+}
+
+/* The log viewer: fixed-height rows, only those in view rendered (LogViewer.tsx).
+   Lines don't wrap, so the box scrolls sideways; the line numbers stay put. */
+.log-view {
+  position: relative;
+  scroll-margin-top: 6rem;
+  height: clamp(18rem, 60vh, 40rem);
+  overflow: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-size: 0.75rem;
+  overscroll-behavior: contain;
+}
+.log-view:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.log-row {
+  position: absolute;
+  left: 0;
+  display: flex;
+  min-width: 100%;
+  height: 24px;
+  line-height: 24px;
+  white-space: pre;
+}
+.log-row-marked {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.log-gutter {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  padding: 0 0.75rem 0 0.5rem;
+  border-right: 1px solid var(--rule);
+  background: var(--bg);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+.log-row-marked .log-gutter {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg));
+}
+.log-icon {
+  display: inline-flex;
+  width: 1em;
+  margin-right: auto;
+}
+.log-text {
+  padding: 0 1rem 0 0.75rem;
+}
+
+/* The lines a problem matched: a short mono excerpt with line numbers. */
+.log-excerpt {
+  max-height: 20rem;
+  overflow: auto;
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+.log-excerpt ol {
+  margin: 0;
+  padding: 0.5rem 0;
+  list-style: none;
+  min-width: max-content;
+}
+.log-excerpt li {
+  display: flex;
+  white-space: pre;
+}
+.log-excerpt .n {
+  flex: none;
+  width: 7ch;
+  padding-right: 0.75rem;
+  text-align: right;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+.log-excerpt .hit {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.log-excerpt .hit .n {
+  color: var(--text);
+}
+.log-excerpt .t {
+  padding-right: 1rem;
+}
+
+/* Disclosure triangles drawn as the studio's chevron, turning down when open. */
+.disclose {
+  list-style: none;
+  cursor: pointer;
+}
+.disclose::-webkit-details-marker {
+  display: none;
+}
+.disclose::before {
+  content: "";
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  margin-right: 0.6em;
+  border-top: 1.4px solid currentColor;
+  border-right: 1.4px solid currentColor;
+  transform: translateY(-0.1em) rotate(45deg);
+  transition: transform 200ms var(--ease);
+}
+details[open] > .disclose::before {
+  transform: translateY(-0.2em) rotate(135deg);
 }
 
 /* The ⌘K palette's group names, as the studio's labels. */

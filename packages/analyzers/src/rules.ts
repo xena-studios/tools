@@ -43,8 +43,8 @@ const L = {
     url: "https://docs.papermc.io/paper/dev/plugin-yml#api-version",
   },
   mixin: {
-    label: "Mixin troubleshooting (Fabric)",
-    url: "https://docs.fabricmc.net/develop/mixins/",
+    label: "Mixin introduction (Fabric wiki)",
+    url: "https://wiki.fabricmc.net/tutorial:mixin_introduction",
   },
   fabricServer: { label: "Fabric server setup", url: "https://fabricmc.net/use/server/" },
 } satisfies Record<string, Link>;
@@ -148,13 +148,18 @@ export const RULES: readonly Rule[] = [
         hits.push({
           lines: [entry?.start ?? l.n, l.n].filter((n, i, a) => a.indexOf(n) === i),
           key: plugin,
-          vars: { plugin, deps: list(deps), isnt: deps.length === 1 ? "isn't" : "aren't" },
+          vars: {
+            plugin,
+            deps: list(deps),
+            isnt: deps.length === 1 ? "isn't" : "aren't",
+            missing: deps.length === 1 ? "isn't" : "aren't",
+          },
         });
       }
       return hits;
     },
     explain:
-      "{plugin} lists {deps} under depend in its plugin.yml, so the server won't load it until that's installed too.",
+      "{plugin} lists {deps} as dependencies in its plugin.yml, so the server won't load it while {deps} {missing} there.",
     fix: [
       "Download {deps} for your server's version and put the jar in plugins/.",
       "Restart the server (not /reload) and check {plugin} now enables.",

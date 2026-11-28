@@ -16,12 +16,18 @@ const BASE = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
-  "connect-src 'self'",
   "manifest-src 'self'",
   "base-uri 'none'",
   "form-action 'none'",
   "frame-ancestors 'none'",
 ];
+
+/** Origins a page may fetch from, beyond its own. Everything else stays 'self'. */
+const CONNECT: Record<string, string[]> = {
+  // The Log Analyzer fetches an mclo.gs log from the browser; mclo.gs sends
+  // Access-Control-Allow-Origin: *, so no server of ours sees the log.
+  "/log-analyzer": ["https://api.mclo.gs"],
+};
 
 const COMMON = [
   "  Cross-Origin-Opener-Policy: same-origin",
@@ -47,9 +53,14 @@ for (const file of pages(CLIENT)) {
     const body = m[1] ?? "";
     if (body) hashes.add(`'sha256-${createHash("sha256").update(body).digest("base64")}'`);
   }
-  const csp = [...BASE, `script-src 'self' ${[...hashes].join(" ")}`.trim()].join("; ");
   let route = `/${path.relative(CLIENT, file).replace(/\\/g, "/")}`;
   route = route.replace(/index\.html$/, "").replace(/\.html$/, "");
+  const connect = ["'self'", ...(CONNECT[route.replace(/\/$/, "")] ?? [])].join(" ");
+  const csp = [
+    ...BASE,
+    `connect-src ${connect}`,
+    `script-src 'self' ${[...hashes].join(" ")}`.trim(),
+  ].join("; ");
   // A page is reachable with and without its trailing slash.
   const routes =
     route === "/" ? ["/"] : [route.replace(/\/$/, ""), route.endsWith("/") ? route : `${route}/`];
