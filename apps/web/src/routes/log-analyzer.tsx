@@ -191,7 +191,7 @@ function LogAnalyzerTool() {
           >
             <label className="block">
               <span className="label block">Paste a log or crash report</span>
-              <span className="mt-1 mb-2 block text-xs text-muted">
+              <span id={`${ids}-stays`} className="mt-1 mb-2 block text-xs text-muted">
                 It stays in this browser: read on your device, never uploaded.
               </span>
               <textarea
@@ -203,7 +203,7 @@ function LogAnalyzerTool() {
                 autoComplete="off"
                 wrap="off"
                 disabled={busy}
-                aria-describedby={`${ids}-privacy`}
+                aria-describedby={`${ids}-stays ${ids}-privacy`}
                 placeholder={
                   "[14:02:17] [Server thread/INFO]: Starting minecraft server version 1.21.4\n[14:02:19] [Server thread/ERROR]: Could not load 'plugins/ShopPlus.jar' in 'plugins'\n…"
                 }
@@ -218,9 +218,7 @@ function LogAnalyzerTool() {
               >
                 Analyse
               </button>
-              <label
-                className={`button compact choice ${busy ? "pointer-events-none opacity-45" : ""}`}
-              >
+              <label className={`button choice ${busy ? "pointer-events-none opacity-45" : ""}`}>
                 Choose a file
                 <input
                   type="file"
@@ -300,9 +298,9 @@ function LogAnalyzerTool() {
               </ul>
             </div>
             <p id={`${ids}-privacy`} className="border-t border-rule pt-4">
-              <strong className="font-semibold text-text">Your log stays in this browser.</strong>{" "}
-              It's read here, on your device, and never uploaded or put in the link. The one request
-              this page makes is to mclo.gs, and only when you give it an mclo.gs link.
+              <strong className="font-semibold text-text">The one request this page makes</strong>{" "}
+              is to mclo.gs, and only when you give it an mclo.gs link. The log isn't put in the
+              link either.
             </p>
             <button
               type="button"
@@ -742,7 +740,8 @@ function Guide() {
           Starting the server again? The{" "}
           <Link to="/flags" className="more">
             Startup Flags
-          </Link>
+          </Link>{" "}
+          tool writes its start script.
         </li>
       </ul>
     </>

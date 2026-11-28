@@ -23,6 +23,7 @@ import { useEffect, useId, useState } from "react";
 import { External } from "../components/Brand";
 import { Output } from "../components/Copy";
 import { type FormatOption, FormatPicker, Toggle } from "../components/FormatPicker";
+import { SeverityLabel } from "../components/Severity";
 import { ToolPage, toolHead } from "../components/ToolPage";
 import { flag, useUrlState } from "../lib/url-state";
 import { toolBySlug } from "../tools";
@@ -391,12 +392,10 @@ function FlagsTool() {
                     key={a.id}
                     className="panel flex flex-wrap items-start gap-x-3 gap-y-2 p-3 text-sm"
                   >
-                    <p className="min-w-0 flex-1 basis-60">
-                      <strong className="font-semibold">
-                        {a.level === "warning" ? "Warning: " : "Note: "}
-                      </strong>
-                      <span className="text-muted">{a.text}</span>
-                    </p>
+                    <div className="flex min-w-0 flex-1 basis-60 flex-col gap-1">
+                      <SeverityLabel severity={a.level === "warning" ? "warning" : "info"} />
+                      <p className="text-muted">{a.text}</p>
+                    </div>
                     {a.fixRamGb !== undefined && a.fixRamGb !== state.ramGb && (
                       <button
                         type="button"
@@ -546,7 +545,8 @@ function Guide() {
           Writing the server list message next? The{" "}
           <Link to="/motd" className="more">
             MOTD Generator
-          </Link>
+          </Link>{" "}
+          previews it in the server list.
         </li>
       </ul>
     </>

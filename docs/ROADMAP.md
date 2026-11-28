@@ -1,10 +1,12 @@
 # Roadmap
 
-What's built, what's next, and how the rest will work. A tool is planned until it's in [`tools.ts`](../apps/web/src/tools.ts) as `live`.
+What's built, what's next, and how it all works. A tool is planned until it's in [`tools.ts`](../apps/web/src/tools.ts) as `live`.
 
 ## Tools
 
-### First release
+### Built
+
+All eight tools of the first release are live.
 
 | Tool           | State | Notes                                                                                                                                                                                                          |
 | -------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -13,8 +15,8 @@ What's built, what's next, and how the rest will work. A tool is planned until i
 | MOTD Generator | Built | Two lines with a server-list preview; output for `server.properties` (`§` escapes, hex for Paper or the 16 colours for vanilla), Velocity, BungeeCord, MiniMOTD and MiniMessage                       |
 | Startup Flags  | Built | RAM, Java (17, 21, 25), software (Paper, Purpur, Folia, Velocity, BungeeCord, Fabric, Forge, vanilla), Aikar's G1 or generational ZGC; `start.sh`, `start.bat`, Pterodactyl and Docker; warns about the Java version, memory and headroom |
 | Log Analyzer   | Built | Paste `latest.log`, drop a `.log.gz` or a crash report, or give an mclo.gs link (fetched from the browser; mclo.gs allows it). 31 rules as data in `packages/analyzers`, matched in each software's own wording, each with a fix; errors grouped by plugin; a filtered log viewer for 50,000 lines. Parsed in the browser |
-| Server Status  | Built | Java (our own ping from the Worker), Bedrock (mcstatus.io, from the browser) or both for Geyser. The server-list entry with the real icon and MOTD, version and protocol, players and the sample, latency, the SRV record and IP, secure chat, Forge mods, and how old the answer is. The address is in the link |
-| Player Lookup  | Built | Name to UUID and back (dashed and undashed), the skin drawn flat front and back on a canvas, model and cape, the skin PNG, head give commands for 1.20.5+ and 1.13 to 1.20.4, and an offline-mode UUID calculator that runs in the browser |
+| Server Status  | Built | Java (our own ping from the Worker; mcstatus.io from the browser for servers on Cloudflare's network), Bedrock (mcstatus.io, from the browser) or both for Geyser. The server-list entry with the real icon and MOTD, version and protocol, players and the sample, latency, the SRV record and IP, secure chat, Forge mods, and how old the answer is. The address is in the link |
+| Player Lookup  | Built | Name to UUID and back (dashed and undashed), the skin drawn flat front and back on a canvas, model and cape, the skin PNG, head give commands for 1.20.5+ and 1.13 to 1.20.4, and an offline-mode UUID calculator that runs in the browser. Mojang first, with [playerdb.co](https://playerdb.co) as the fallback when Mojang refuses the Worker |
 | Server Icon    | Built | Crop and scale any image to 64×64 `server-icon.png` (pixel art or smooth), previewed in the server list. Never uploaded                                                                                       |
 
 ### After that
@@ -35,7 +37,7 @@ What's built, what's next, and how the rest will work. A tool is planned until i
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Server Status (Java)    | A TCP connection to the server (`connect()` in Workers)                                                                                                                                                                                                                                   |
 | Server Status (Bedrock) | Bedrock answers over UDP, which Workers can't send. Uses the [mcstatus.io](https://mcstatus.io/docs) API (free, no key, 5 requests a second per IP) from the browser: it sends `Access-Control-Allow-Origin: *`, so the Worker isn't involved and only `/status`'s CSP allows `https://api.mcstatus.io`. Our own UDP pinger can replace it later |
-| Player Lookup           | Mojang's API doesn't allow cross-origin calls, and answers should be cached                                                                                                                                                                                                               |
+| Player Lookup           | Mojang's API doesn't allow cross-origin calls, and answers should be cached. When Mojang refuses the Worker (it often answers Workers with errors), the Worker asks [playerdb.co](https://playerdb.co), a public cache of the same Mojang data                                         |
 | spark reader            | Fetching profiles from spark's bytebin (no CORS)                                                                                                                                                                                                                                          |
 
 - **Shared logic lives in packages** with tests: `mc-text`, `mc-flags`, `analyzers` (log rules; config rules to follow) and `mc-protocol` (the status ping, UUIDs and address checks) now; `mc-data` (versions, `pack_format`s, items, generated from public data) as their tools arrive.
@@ -48,7 +50,7 @@ The Worker serves three GET endpoints, as TanStack Start server routes (`apps/we
 | Route | What it does | Cached |
 | --- | --- | --- |
 | `GET /api/status/java?host=<host[:port]>[&port=<port>]` | Validates the address, follows `_minecraft._tcp` SRV when no port is given (DNS over HTTPS to `cloudflare-dns.com`), resolves A then AAAA records, refuses if any is non-public, then `connect()`s to that IP and runs the handshake, status request and ping, with a 5 second limit and a 256KB cap. Always answers JSON: `online: true` with `status`, `target` (SRV, host, IP, port), `latency` and `from` (the data centre), or `online: false` with `error` and `message` | 60 s per host and port, online or not. Bad input isn't cached at the edge |
-| `GET /api/player/<name or UUID>` | A name goes to `api.mojang.com/users/profiles/minecraft/<name>` (falling back to `api.minecraftservices.com/minecraft/profile/lookup/name/<name>` on a 403 or 5xx), then `sessionserver.mojang.com/session/minecraft/profile/<uuid>`, whose base64 `textures` property gives the skin, its model and the cape. Answers `ok: true` with `player`, or `ok: false` with `error` | Found: an hour. Not found: 5 minutes (a 200 with `ok: false`). Rate limited or Mojang down: 30 s |
+| `GET /api/player/<name or UUID>` | A name goes to `api.mojang.com/users/profiles/minecraft/<name>` (falling back to `api.minecraftservices.com/minecraft/profile/lookup/name/<name>` on a 403 or 5xx), then `sessionserver.mojang.com/session/minecraft/profile/<uuid>`, whose base64 `textures` property gives the skin, its model and the cape. If Mojang fails (an error, not a miss), it asks `playerdb.co/api/player/minecraft/<name or UUID>`, which returns the same `textures` property; a miss is only trusted from Mojang. Answers `ok: true` with `player`, or `ok: false` with `error` | Found: an hour. Not found: 5 minutes (a 200 with `ok: false`). Rate limited or Mojang down: 30 s |
 | `GET /api/skin/<texture hash>` | The PNG from `textures.minecraft.net/texture/<hash>`, so the page draws it on a canvas under `img-src 'self'`. Only that host and only a hex hash: the URL is built by the Worker, so it isn't an open proxy. Checked to be a PNG under 128KB | A day, and `immutable` in the browser: the hash is the file's content |
 
 **Error codes.** Java status: `bad_request` (not an address, or a port outside 1 to 65535), `blocked_address` (private, loopback, link-local, CGNAT, multicast, documentation or other reserved IPv4 and IPv6 ranges, `localhost`, `.local` and similar names, as typed or after DNS, SRV targets included), `dns_failed`, `timeout`, `refused`, `bad_response` (something answered but not with a status), and `cloudflare_ip`. Player: `bad_request`, `not_found`, `rate_limited`, `upstream_error`.
@@ -68,7 +70,8 @@ Meant to cost nothing to run:
 | Pages, scripts, fonts | Workers static assets: free and unlimited                                               | $0   |
 | Status, lookups       | Workers Free: 100,000 requests a day, 10 ms CPU each (pings mostly wait on the network) | $0   |
 | Caching               | The Workers Cache API (not KV, whose free plan allows 1,000 writes a day)               | $0   |
-| Bedrock status        | mcstatus.io                                                                             | $0   |
+| Bedrock status        | mcstatus.io, from the visitor's browser; also Java servers on Cloudflare's network      | $0   |
+| Player fallback       | playerdb.co, from the Worker, only when Mojang refuses it                               | $0   |
 | Analytics             | Cloudflare Web Analytics                                                                | $0   |
 | CI and deploys        | GitHub Actions (free for public repos)                                                  | $0   |
 

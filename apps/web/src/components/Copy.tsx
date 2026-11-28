@@ -107,7 +107,7 @@ export function Output({
       </PhoneBar>
       <div className="mb-2 flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold tracking-normal">{label}</h3>
+          <h2 className="text-sm font-semibold tracking-normal">{label}</h2>
           {hint && <p className="text-xs text-muted">{hint}</p>}
         </div>
         <CopyButton value={value} quiet={quiet} />

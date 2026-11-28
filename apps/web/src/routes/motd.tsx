@@ -296,7 +296,7 @@ function MotdTool() {
             <legend className="label mb-2">Preview</legend>
             <div className="grid gap-3 sm:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]">
               <label className="block">
-                <span className="mb-1 block text-xs text-muted">Server name</span>
+                <span className="label mb-2 block">Server name</span>
                 <input
                   className="field"
                   value={state.name}
@@ -306,7 +306,7 @@ function MotdTool() {
                 />
               </label>
               <label className="block">
-                <span className="mb-1 block text-xs text-muted">Online</span>
+                <span className="label mb-2 block">Online</span>
                 <input
                   className="field tabular-nums"
                   type="number"
@@ -317,7 +317,7 @@ function MotdTool() {
                 />
               </label>
               <label className="block">
-                <span className="mb-1 block text-xs text-muted">Max</span>
+                <span className="label mb-2 block">Max</span>
                 <input
                   className="field tabular-nums"
                   type="number"

@@ -7,8 +7,8 @@ import {
   offlineUuid,
   parseUuid,
 } from "@xena-tools/mc-protocol";
-import { useEffect, useId, useState } from "react";
-import { CopyButton, Output } from "../components/Copy";
+import { useEffect, useId, useRef, useState } from "react";
+import { CopyButton, Output, PhoneBar, useOffscreen } from "../components/Copy";
 import { ResultState } from "../components/ResultState";
 import { CapeView, SkinViews } from "../components/Skin";
 import { ToolPage, toolHead } from "../components/ToolPage";
@@ -164,7 +164,10 @@ function PlayerTool() {
               <button
                 type="button"
                 className="button compact self-start"
-                onClick={() => lookup(state.query).then(setResult)}
+                onClick={() => {
+                  setResult({ kind: "loading" });
+                  lookup(state.query).then(setResult);
+                }}
               >
                 Try again
               </button>
@@ -183,8 +186,8 @@ function Empty({ onPick }: { onPick: (q: string) => void }) {
   return (
     <section aria-label="Examples" className="flex flex-col gap-3">
       <p className="max-w-[var(--measure)] text-muted">
-        Find a player's UUID and skin from their name, or their name from a UUID, with a head give
-        command for your version. Or try one:
+        Type a name or a UUID above to get both forms of the UUID, the skin front and back, and a
+        head give command for your version. Or try one:
       </p>
       <div className="flex flex-wrap gap-2">
         {["Notch", "jeb_", "069a79f4-44e9-4726-a5be-fca90e38aaf5"].map((q) => (
@@ -237,8 +240,14 @@ function Found({ player }: { player: Player }) {
   const dashed = dashUuid(player.id);
   const modern = `/give @s minecraft:player_head[minecraft:profile={name:${snbt(player.name)}}]`;
   const legacy = `/give @s minecraft:player_head{SkullOwner:${snbt(player.name)}}`;
+  // On a phone the skin comes first, so the UUID's copy button waits in the bar.
+  const facts = useRef<HTMLDListElement>(null);
+  const offscreen = useOffscreen(facts);
   return (
     <div className="grid gap-10 lg:grid-cols-[auto_minmax(0,1fr)]">
+      <PhoneBar show={offscreen} label={`${player.name}'s UUID`}>
+        <CopyButton value={dashed} />
+      </PhoneBar>
       <section aria-label="Skin" className="flex flex-col gap-4">
         {player.skin ? (
           <>
@@ -270,7 +279,7 @@ function Found({ player }: { player: Player }) {
           <ResultState kind="good">Found</ResultState>
           <h2 className="mt-2 text-[length:var(--t-h3)]">{player.name}</h2>
         </div>
-        <dl className="facts">
+        <dl ref={facts} className="facts">
           <CopyRow label="UUID" value={dashed} />
           <CopyRow
             label="Without dashes"

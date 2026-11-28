@@ -565,7 +565,7 @@ function JavaSection({
             <p className="mt-4 text-xs text-muted">
               This server is on Cloudflare's network, which our checker can't open connections to,
               so this status is from{" "}
-              <a href="https://mcstatus.io" target="_blank" rel="noreferrer">
+              <a href="https://mcstatus.io">
                 <External>mcstatus.io</External>
               </a>
               .
@@ -686,7 +686,7 @@ function BedrockSection({
   const credit = (
     <p className="mt-4 text-xs text-muted">
       Bedrock status from{" "}
-      <a href="https://mcstatus.io" target="_blank" rel="noreferrer">
+      <a href="https://mcstatus.io">
         <External>mcstatus.io</External>
       </a>
       , checked from their servers and cached by them for about a minute.
@@ -832,7 +832,7 @@ function Guide() {
         <li>
           <strong>Bedrock</strong> servers answer over UDP, which our checker can't send, so their
           status comes from{" "}
-          <a href="https://mcstatus.io" target="_blank" rel="noreferrer">
+          <a href="https://mcstatus.io">
             <External>mcstatus.io</External>
           </a>
           , straight from your browser. Bedrock's port is 19132 unless the server sets another.

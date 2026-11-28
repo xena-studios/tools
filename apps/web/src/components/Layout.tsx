@@ -57,7 +57,7 @@ export function Header() {
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-auto border-t border-rule pt-10 pb-12 text-[0.9375rem] text-muted">
+    <footer className="mt-auto border-t border-rule pt-10 pb-12 text-sm text-muted">
       <div className="wrap grid gap-4">
         <p className="flex flex-wrap items-center gap-x-5 gap-y-2">
           <a

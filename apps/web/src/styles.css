@@ -127,10 +127,11 @@
     background: color-mix(in srgb, var(--accent) 35%, transparent);
     color: var(--text);
   }
+  /* The ring follows each element's own shape (outlines follow border-radius):
+     a pill gets a pill ring, a panel a 12px one. It never reshapes the element. */
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 2px;
   }
   ::placeholder {
     color: var(--muted);
@@ -282,9 +283,9 @@
     transform: translateY(-0.1em) rotate(45deg);
     transition: transform 200ms var(--ease);
   }
-  .group:hover .more::after,
   .more:hover::after,
-  .more:focus-visible::after {
+  .more:focus-visible::after,
+  .group:hover .more::after {
     transform: translate(0.2em, -0.1em) rotate(45deg);
   }
 
@@ -564,6 +565,10 @@ svg.horizon {
   display: flex;
   gap: calc(var(--gp) * 3);
   width: calc(var(--gp) * 306);
+  /* The row is 36 game pixels tall whatever is in it, so nothing moves while the
+     fonts and the container's size settle on the first frame. */
+  height: calc(var(--gp) * 36);
+  overflow: hidden;
   margin-inline: auto;
   padding: calc(var(--gp) * 2);
 }

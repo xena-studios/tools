@@ -31,11 +31,14 @@ interface ToolPageProps {
 export function ToolPage({ tool, children, guide }: ToolPageProps) {
   return (
     <>
-      <main id="main" className="wrap pt-10 pb-20 sm:pt-14 lg:pb-4">
-        <header className="mb-8 sm:mb-10">
-          <p className="kicker mb-4">{`// ${tool.category}`}</p>
+      <main id="main" className="wrap pt-8 pb-20 sm:pt-14 lg:pb-4">
+        <header className="mb-6 sm:mb-10">
+          <p className="kicker mb-3 sm:mb-4">{`// ${tool.category}`}</p>
           <h1 className="text-[length:var(--t-tool)] leading-[1.05]">{tool.name}</h1>
-          <p className="lead mt-3">{tool.summary}</p>
+          {/* On a phone the lead drops to body size, so the tool starts higher. */}
+          <p className="lead mt-2 max-sm:text-base max-sm:leading-relaxed sm:mt-3">
+            {tool.summary}
+          </p>
         </header>
         {children}
         {guide && (

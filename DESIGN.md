@@ -136,7 +136,7 @@ components:
 
 Tools is the Xena Studios tools site, and it has no identity of its own: it joins the studio's design system exactly as Brand (brand.xenastudios.co) does, with the same tokens, type, hairlines and planet horizon as xenastudios.co. Every colour and logo comes from [xena-studios/brand](https://github.com/xena-studios/brand), synced into `apps/web/src/brand/` with `pnpm brand:sync`; `apps/web/src/styles.css` only aliases those tokens and adds scale. The chrome is calm enough to disappear. The only thing on the page that looks like the game is the preview, drawn by the game's own rules.
 
-Each tool is one working bench: a compact header, the preview at full width, then the controls and the output side by side, with the copy button in the first screen. The home page is the studio's page hero (kicker, title, lead, a primary pill, the rising horizon) followed by hairline rows: the tools, how they work, and what's next. Density is moderate and even; the space between sections does the grouping, not boxes.
+Each tool is one working bench: a compact header, the preview at full width, then the controls and the output side by side, with the copy button in the first screen. The home page is the studio's page hero (kicker, title, lead, a primary pill, the rising horizon) followed by hairline rows: the tools grouped by category, how they work, and what's next (only while something is planned). Density is moderate and even; the space between sections does the grouping, not boxes.
 
 It reads like an engineer wrote it: plain words, real format and plugin names, and a straight note wherever the preview is only close.
 
@@ -163,7 +163,7 @@ Restrained: tinted deep-space neutrals carry the page, and Ion Blue appears on w
 - **Space** (`space`): raised surfaces: panels, fields, the command palette, and the pill fill at 70%.
 - **Surface** (`surface`): the one step above space: inline code in the guides and the palette's highlighted row.
 - **Line** (`line`): every hairline: borders, row dividers, the header's rule, and the scrollbar thumb.
-- **Muted** (`muted`): leads, summaries, labels, hints and placeholders. 6.5:1 on void, 5.8:1 on surface.
+- **Muted** (`muted`): leads, summaries, labels, hints and placeholders. 6.5:1 on void, 6.3:1 on space (every panel and field), 5.8:1 on surface.
 - **Text** (`text`): headings, body and output. 17.7:1 on void.
 
 ### State
@@ -185,7 +185,7 @@ Restrained: tinted deep-space neutrals carry the page, and Ion Blue appears on w
 
 ## Typography
 
-**Display Font:** JetBrains Mono Variable (with ui-monospace, SFMono-Regular, Menlo, monospace), self-hosted through Fontsource
+**Display Font:** JetBrains Mono Variable (with ui-monospace, SFMono-Regular, Menlo, monospace), self-hosted through Fontsource; the latin subset is preloaded in every page's head, as on the studio's sites
 **Body Font:** the same
 **Preview Font:** Monocraft (OFL), self-hosted at 400 and 700, for Minecraft text only
 
@@ -198,7 +198,7 @@ Restrained: tinted deep-space neutrals carry the page, and Ion Blue appears on w
 - **Title** (600, `clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem)`): tool names in the list rows and the guide's headings.
 - **Lead** (400, `clamp(1.0625rem, 1rem + 0.35vw, 1.25rem)`, 1.75, muted): the sentence under each h1, capped at 64ch.
 - **Body** (400, 1rem, 1.7): everything else; prose capped at 64ch. Ligatures are off.
-- **Label** (400, 0.75rem, +0.14em, uppercase, muted): metadata and control names: fieldset legends ("Format", "Colours"), the "Tools" name in the header, a tool's category in its list row, the palette's group names and the copyright.
+- **Label** (400, 0.75rem, +0.14em, uppercase, muted): metadata and control names: fieldset legends and field labels ("Where it goes", "Colours", "Server name"), the "Tools" name in the header, the category over each group of tools on home, the palette's group names and the copyright.
 - **Kicker** (400, 0.75rem, +0.18em, uppercase, muted): the brand's `//` kicker over each page's h1.
 
 Headings use -0.03em tracking and `text-wrap: balance`; paragraphs use `text-wrap: pretty`.
@@ -216,15 +216,16 @@ Headings use -0.03em tracking and `text-wrap: balance`; paragraphs use `text-wra
 One centred column, `--max` 76rem wide plus fluid page gutters (`--page`, `clamp(1.25rem, 4vw, 3rem)`), on a 4pt spacing scale that turns fluid at the top step (`--s-8`, `clamp(4rem, 3rem + 4vw, 6rem)`) for section padding.
 
 - **Header:** sticky, 64px, a hairline below and a blurred void at 80%. XENA STUDIOS, a hairline, then the `Tools` label (hidden under 30rem); the "Find a tool" search pill with its ⌘K / Ctrl K hint; GitHub from md up.
-- **Home:** the page hero with the horizon rising at its bottom edge, then sections separated by hairlines, each a headline and a list of hairline rows (`14rem / 1fr / auto` from sm up, stacked below).
-- **Tool page** (`ToolPage`): kicker, h1 and lead in a compact header; the preview at full width; then controls left and output right in two equal columns from lg up, with the output column sticky at 6rem from the top. Below lg it stacks, controls first.
-- **Guide:** under the tool, a hairline, then "How to use it" prose at 64ch.
+- **Home:** the page hero with the horizon rising at its bottom edge, then sections separated by hairlines, each a headline and a list of hairline rows (`14rem / 1fr / auto` from sm up, stacked below). The tools are grouped by their category in `tools.ts` (Text, Server, Lookup, Branding), each group a label over its own rows. "Next up" shows only while a tool is planned.
+- **Tool page** (`ToolPage`): kicker, h1 and lead in a compact header (below sm the lead drops to body size, so the tool starts higher on a phone); the preview at full width; then controls left and output right in two equal columns from lg up, with the output column sticky at 6rem from the top. Below lg it stacks, controls first.
+- **Guide:** under the tool, a hairline, then "How to use it" prose at 64ch: two to six h2 sections in plain question or topic words ("Where it goes", "Good to know"), each a short list.
+- **404:** the `// 404` kicker, "No tool here", one line pointing to ⌘K, the "Find a tool" primary pill and an "All tools" pill, and the closing horizon. Titled "Page not found" and `noindex`.
 - **Closing horizon:** every tool page ends with a static horizon (`clamp(5rem, 22vw, 17rem)` tall) below the work, so it never pushes the output down.
 - **Footer:** a hairline, the XENA mark linking to xenastudios.co, the copyright, the AGPL-3.0 licence, Mojang's required disclaimer, and the footer links.
 
 ### Named Rules
 
-**The Output First Rule.** At 1440×900 the preview, the controls and the copy button are in the first screen. On a phone, while the output panel is off screen, a fixed bar at the bottom keeps its copy button in reach.
+**The Output First Rule.** At 1440×900 the preview, the controls and the copy button are in the first screen. On a phone, while the output panel is off screen, a fixed bar at the bottom keeps its copy button in reach (Download on Server Icon, the UUID on Player Lookup). Tools whose first step is a lookup (Server Status, Player Lookup) or a paste (Log Analyzer) have their primary button, beside the field, in the first screen instead.
 
 **The Rows Not Cards Rule.** Lists are hairline rows that tint to space at 60% on hover. No card grids.
 
@@ -237,6 +238,10 @@ Flat by default. Depth is tonal (void ground, space panels, surface for the one 
 - **Dialog** (`box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25)`): the command palette only.
 - **Field focus** (`box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent)`): a soft Ion Blue ring round a focused field, with its border turning Ion Blue.
 - **Game shadow** (`text-shadow: 0.125em 0.125em 0 <quarter of the colour>`): inside previews only, the game's drop shadow at a quarter of each span's colour (`shadowOf` in `@xena-tools/mc-text`).
+
+### Focus ring
+
+`:focus-visible` is a 2px Ion Blue outline 3px out. Outlines follow `border-radius`, so a pill gets a pill ring and a panel a 12px one; the ring never changes the element's own radius. Fields use the soft field-focus ring instead, and the range slider rings its thumb.
 
 ### Named Rules
 
@@ -262,6 +267,8 @@ Pills, quiet until touched.
 
 - **Style:** a compact pill wrapping a real, visually hidden radio button or checkbox (`FormatPicker`, `Toggle`), so keyboard and screen readers work natively. Each format's "used by" note is its title.
 - **State:** selected is an Ion Blue edge and a 14% Ion Blue tint, with the text kept in the text colour. Focus draws the 2px Ion Blue ring round the whole pill.
+- **One of several** is always `FormatPicker` (radio buttons, so arrow keys move the choice): formats, blending, scaling, editions. `Toggle` (a checkbox) is only for an on/off setting, and may sit in the same row as the choice it qualifies ("Skip spaces" after the blending).
+- **Where it goes:** the output choice on every tool is legended "Where it goes", and each option is named by where its output is pasted (MiniMessage, `start.sh`, Velocity); the hint under the Output's name says where exactly.
 
 ### Cards / Containers
 
@@ -275,19 +282,20 @@ Pills, quiet until touched.
 
 - **Style:** space fill, hairline border, 12px radius, 44px minimum height, Ion Blue caret, muted placeholder.
 - **Focus:** the border turns Ion Blue with a 3px Ion Blue ring at 22%, in place of the outline.
+- **Labels:** every field has a visible label in the label style above it (or a fieldset legend over a group), with a muted `text-xs` hint under it, tied by `aria-describedby`.
 - **Hover:** the hairline warms 35% toward Ion Blue.
 - **Error:** the border turns danger (`aria-invalid`), and a `role="alert"` line in danger says what's wrong.
 
 ### Navigation
 
 - **Header:** XENA STUDIOS | TOOLS on the left; the search pill (muted text, hairline, warming to Ion Blue and text colour on hover) and GitHub on the right.
-- **Command palette (⌘K / Ctrl K):** a 36rem dialog at 12vh, space fill, hairline, 12px radius. A borderless search input over grouped results; group names are labels, rows are a name and a one-line muted summary, and the highlighted row is surface. It finds live tools by name and keyword.
+- **Command palette (⌘K / Ctrl K):** a 36rem dialog at 12vh, space fill, hairline, 12px radius. A borderless search input over results grouped by category; group names are labels, rows are a name and a one-line muted summary, and the highlighted row is surface. It lists every live tool, and finds them by words in the name, keywords or summary, name matches first. The dialog (cmdk) is its own chunk, fetched when the browser is idle or on the first open.
 - **Links:** text colour, underlined at 0.25em offset in a 35% tint that goes solid on hover. Outbound links carry the External arrow; links deeper into the site carry the `.more` chevron.
 - **Skip link:** the first focusable element, shown as an Ion Blue box with void text.
 
 ### Output
 
-The result and its copy button. A panel with the format's name (small, 600) and where it's used (muted), the Copy pill on the right, then the result in mono on void in an 8px box (select-all, scrolls past 12rem). A note for anything the format can't hold goes under it in muted text. Copy says "Copied" for 1.6s.
+The result and its copy button. A panel with the format's name (an h2 at 0.875rem, 600, so headings stay in order under the h1) and where it's used (muted), the Copy pill on the right, then the result in mono on void in an 8px box (select-all, scrolls past 12rem). A note for anything the format can't hold goes under it in muted text. Copy says "Copied" for 1.6s.
 
 ### McText (signature)
 
@@ -304,7 +312,7 @@ Draws spans the way the game does, in Monocraft at 1.25 line height, with `pre-w
 
 `components/ServerList.tsx`: one entry of the game's multiplayer screen, used by the MOTD Generator, Server Icon and Server Status. Everything in it is drawn by us: no game textures, sprites or font.
 
-- **Grid:** laid out in game pixels (`--gp`), as the game lays out the row: 305 wide, a 32-pixel icon, a 3-pixel gap, then 267 pixels for the name and the MOTD. A game pixel is 2px where there's room and shrinks with the container (`100cqw / 306`) on a phone, so the proportions hold at any width.
+- **Grid:** laid out in game pixels (`--gp`), as the game lays out the row, 36 tall whatever is in it (so nothing moves as fonts load): 305 wide, a 32-pixel icon, a 3-pixel gap, then 267 pixels for the name and the MOTD. A game pixel is 2px where there's room and shrinks with the container (`100cqw / 306`) on a phone, so the proportions hold at any width.
 - **Icon:** 64×64 on screen at 2×, `image-rendering: pixelated`. With no icon it draws a placeholder: a dark square with a hairline and a small landscape.
 - **Name:** white, with the game's shadow.
 - **MOTD:** McText's line renderer in Monocraft at 9 game pixels to the em (Monocraft's own grid: 9 to the em, 6 to an advance), line height 9. It wraps in the 267-pixel box and clips after two lines, as the game does. Uncoloured text is the list's grey, `#808080`, a step darker than chat's.
